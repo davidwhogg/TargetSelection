@@ -1,0 +1,95 @@
+% This file is part of the TargetSelection project
+% Copyright 2019 the authors.
+
+% To-dos
+% ------
+% - make a to-do list
+% - make style notes
+
+% Style notes
+% - 
+
+\documentclass[modern]{aastex62}
+% \usepackage{graphicx, xcolor}
+% \usepackage[sort&compress]{natbib}
+
+% units macros
+\newcommand{\unit}[1]{\mathrm{#1}}
+\newcommand{\pc}{\unit{pc}}
+\newcommand{\kpc}{\unit{kpc}}
+
+% math macros
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\T}{^{\mathsf{T}}}
+\newcommand{\given}{\,|\,}
+
+% chemical macros
+\newcommand{\abundance}[2]{\mathrm{\left[{#1}/{#2}\right]}}
+\newcommand{\alphafe}{\abundance{\alpha}{Fe}}
+
+% text macros
+\newcommand{\documentname}{\textsl{Article}}
+\newcommand{\sectionname}{Section}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\acronym}[1]{{\small{#1}}}
+\newcommand{\project}[1]{\textsl{#1}}
+\newcommand{\foreign}[1]{\textsl{#1}}
+\newcommand{\etal}{\foreign{et al.}}
+
+\setlength{\parindent}{1.4em} % trust in Hogg
+\shorttitle{desiderata for target selection}
+\shortauthors{hogg & rix}
+
+\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
+% \graphicspath{ {figures/} }
+%\DeclareGraphicsExtensions{.pdf,.eps,.png}
+
+\title{\textbf{%
+Target selection for spectroscopic surveys:\\
+General requirements for statistical and legacy value%
+}}
+
+\author[0000-0003-2866-9403]{David W. Hogg}
+\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+\affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+
+\author[0000-0003-4996-9069]{Hans-Walter Rix}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+
+\begin{abstract}\noindent
+% context
+foo
+% aims
+% methods
+% results
+\end{abstract}
+
+\keywords{\raggedright
+ foo
+ ---
+ bar
+}
+
+\section{Introduction}
+
+foo bar whatever
+
+\acknowledgements It is a pleasure to thank the \project{Milky Way
+  Mapper} Collaboration for help with refining these principles.
+
+\facilities{
+ESA \project{Gaia},
+}
+
+\software{
+foo,
+bar
+}
+
+\begin{thebibliography}{}
+\bibitem[De Silva \etal(2015)]{galah} De Silva, G.~M., Freeman, K.~C., Bland-Hawthorn, J., \etal\ 2015, \mnras, 449, 2604 
+\end{thebibliography}
+
+\end{document}
