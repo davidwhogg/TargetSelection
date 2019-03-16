@@ -41,7 +41,7 @@
 \addtolength{\topmargin}{-0.5in}
 \addtolength{\textheight}{1.0in}
 \shorttitle{desiderata for target selection}
-\shortauthors{hogg & rix}
+\shortauthors{hogg \& rix}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 % \graphicspath{ {figures/} }
@@ -98,9 +98,106 @@ onto the matters of great interest.
  bar
 }
 
-\section{Introduction}
+\section{Why target selection matters}
 
 foo bar whatever
+
+Here we should state our fundamental assumptions about the reader's goals.
+We might mention kinds of surveys and projects that are out of scope!
+
+For example, 2-pt functions are out of scope, because we can't write
+down LFs in general.
+
+For another, adaptive follow-up of RV candidates is out of scope, although
+many of the same principles will apply.
+
+We should return to these points in the discussion.
+
+\section{The selection function}
+
+Define the nomenclature.
+
+There are data and features and selection as a function of features.
+
+There is an \foreign{a priori} selection function and an \foreign{a posteriori}
+selection function. You can only control one of these fully, unless you have near-unit
+completeness on your spectral analysis.
+
+Here might be the place to note that the selection function has to something of
+which we can ask \emph{counterfactual} questions. It can't just be defined at
+the locations of the data.
+
+\section{The likelihood principle}
+
+Bayesian likelihood principle and frequentist optimal estimators.
+
+Relationship between likelihood and forward model. Relationship between
+likelihood and noise model.
+
+This section should include the point that the tradition is to divide out
+the selection function. That's not good, for divide-by-zero or variance
+reasons. There are words in a DFM paper relevant to this.
+
+The divide-by-selection-function methods have the great property that you don't need
+to know the SF everywhere. You only need to know it at your data. But then
+it can't penalize models that put high weight on locations with near-zero
+completeness. That is, it is biased in these regions and wrong.
+
+Here we should also bring up the idea of confounders. If you think the SF
+is S(x) but it is actually S(x, w) and you don't track or can't predict w,
+then you can't write an accurate LF.
+
+\section{Information theory}
+
+Once you have a LF you can start saying things about information.
+
+There is almost certainly a result (a la Bovy) that we don't need to know
+things about the SF that don't project strongly onto our parameters of interest.
+Let's make that explicit here, cite Bovy.
+
+When we say you don't have to know everything about the SF, that could be
+in space, in time, in Fourier Space, in magnitude, and so on.
+
+\section{Spatial selection functions}
+
+Select on clustering? What's wrong with that?
+
+\section{Doing multiple surveys at once}
+
+Note that if you are doing both MWM and BHM at the same time, there will be
+spatial conflicts.
+
+That leads to the selection of one star being affected by properties of the
+BHM targets. Can we deal with that? I think yes in this case.
+
+But now think about one MWM target category conflicting with another MWM target
+category. That might lead to ``confounder'' situations where the relevant selection
+information can't be modeled in any model.
+
+Idea of pre-down-sampling by a fixed, chosen function before starting, to avoid
+all spatial conflicts. This has interesting properties. It is a good idea; it isn't
+\emph{perfectly} safe (why?), but it is pretty good.
+
+\section{Adaptive strategies}
+
+What changes for, or how do we think about, strategies in which you want to
+adaptively deepen certain interesting targets, but cut off uninteresting targets,
+while you are operating.
+
+There is a one-target version of this (this target is low metallicity, deepen it).
+
+And there is a target-category version of this (we find that we can't measure WDs
+accurately enough to do our science so we drop the category). Or we change the exposure
+times we use \emph{during} the survey, based on what we see.
+
+Are these both interesting to our study?
+
+\section{Discussion}
+
+Come back to the assumptions made and talk about what happens when we
+adjust or weaken or don't obey these.
+
+For example, what of this discussion carries over to two-point functions?
 
 \acknowledgements It is a pleasure to thank the \project{Milky Way
   Mapper} Collaboration for help with refining these principles.
