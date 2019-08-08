@@ -5,6 +5,8 @@
 % ------
 % - make a to-do list
 % - make style notes
+% - should we have an ``open issues'' section?
+% - 
 
 % Style notes
 % - 
@@ -53,7 +55,7 @@ General requirements for statistical and legacy value%
 }}
 
 \author[0000-0003-2866-9403]{David W. Hogg}
-\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726~Broadway, New York, NY 10003, USA}
 \affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
 \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
 \affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
@@ -114,7 +116,77 @@ used for inference, but at information-theoretic cost.
 
 \section{Why target selection matters}
 
-foo bar whatever
+Many projects in conteporary astrophysics proceed by obtaining
+wide-field imaging and then selecting targets for spectroscopic
+follow-up.
+This mode is very old, but it became truly data-intensive with
+the \project{2dF} (CITE) and \project{Sloan Digital Sky Survey} (CITE)
+projects, which mapped the large-scale structure to test and learn the
+cosmological model.
+Now there are projects with this character in a range of different
+astrophysics sub-fields, including cosmology, Galactic archaeology,
+stellar astrophysics, transient characterization, and exoplanet search.
+The successes have been legion:
+We know the parameters of the cosmological model at percent-level
+precision, supernovae of many types have been found and monitored,
+hundreds of exoplanets have been spectroscopically confirmed,
+and we have three-dimensional maps of the Milky Way in
+element abundances and kinematics.
+In this \documentname, we would like to emphasize the point that the
+quality of the results from these surveys depends both on the
+spectroscopic data they take, and equally (or even more importantly)
+on the way the spectroscopic targets were selected from the original
+imaging data.
+
+Once a project is taking thousands to millions of spectra, the
+end-to-end uncertainties in the results it produces tend to be
+dominated not by the shot noise (square-root-of-$N$) or sample size,
+but rather the ability to understand the selection effects.
+That is, to make precise measurements of a population of galaxies or
+stars or planets, we need to know what galaxies or stars or planets
+were and were not selected for spectroscopic targeting, and what would
+have been observed differently if the population of interest had been
+different.
+That is, we need to understand the \emph{selection function} of the
+survey.
+We will say more about this below, but the selection function is,
+loosely, the probability that a source on the sky would have been
+observed spectroscopically if it had been there, conditioned on the
+position and physical or observational properties of that source.
+The object of this \documentname\ is to elucidate the aspects of
+target selection are most relevant to understanding and obtaining a
+computationally tractable model of the selection function.
+
+Even when a spectroscopic project is beautifully designed and
+executed, it isn't always possible to understand or model this
+selection function accurately.
+For example, when targets for spectroscopy are selected by hand or by
+a human process or human classification, it is often difficult to
+figure out what would or would not have been observed in different
+(counter-factual) situations.
+For another, when each target is chosen in a way that depends strongly
+on properties of that target that are difficult to understand within
+the context of the physical model, it is difficult to build a useful
+model of the selection function.
+It might be accurate, but not useful!
+For yet another, when one target's selection depends on the properties
+of other sources in the vicinity of that target, the selection
+function might depend on spatial structures that are hard to model or
+hard to manipulate computationally.
+Here we develop guidelines for target selection that, if followed,
+will improve the chances that it will be possible to build a simple
+and accurate selection function.
+This, in turn, will improve the chances that the resulting data
+will be useful for building a precise model of the relevant source
+population.
+This, in turn, increases the value of the project for its investigators,
+and the legacy value for the community.
+
+In what follows, we make some assumptions about what's important,
+scientifically, about the spectroscopic project of interest, and what
+is not....
+
+HOGG: SYNTACTICAL REFERENCE foo bar whatever
 
 Here we should state our fundamental assumptions about the reader's goals.
 We might mention kinds of surveys and projects that are out of scope!
