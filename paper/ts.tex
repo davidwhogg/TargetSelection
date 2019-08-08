@@ -39,7 +39,7 @@
 % margins and headers and spacing changes
 \setlength{\parindent}{1.4em} % trust in Hogg
 \addtolength{\topmargin}{-0.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\textheight}{0.75in}
 \shorttitle{desiderata for target selection}
 \shortauthors{hogg \& rix}
 
@@ -63,23 +63,26 @@ General requirements for statistical and legacy value%
 
 \begin{abstract}\noindent
 % context
-We are in a magical time for spectroscopic surveys; the astronomical
-community is building and operating large projects in the areas of
+Many new spectroscopic projects are being built and operated
+in the areas of
 large-scale structure, Milky Way cartography, stellar physics,
 exoplanet discovery, and explosive transients.
-These projects all have in common that they must pre-select sources
+These must pre-select sources
 for spectroscopic observation, from prior imaging (and spectroscopic)
 data.
 They also have in common that they want their results to be useful for
 statistics, population inferences, and legacy use in future projects.
 % aims
-Here we lay out some general principles for target selection that, if
-obeyed, will help a survey to achieve this latter goal.
+Here we lay out some general principles for target selection that will
+create this legacy value.
 % methods
 The key idea, from which all principles flow, is that the survey must
-be able to produce a computationally tractable and (in appropriate ways)
-accurate likelihood function for parameters of interest, given the
-data obtained.
+be able to produce a computationally tractable
+likelihood function for parameters of interest.
+This, in turn, recommends that selection be performed such that it is possible
+to construct a relatively simple selection function, or a probability
+with which any source (real or counter-factual) would have been observed
+in a repeat of the survey.
 % results
 Among our findings and recommendations are the following:
 You want to base your selection as much as possible on quantities that
@@ -90,12 +93,23 @@ depend strongly on the properties of \emph{other} sources.
 You don't need to know everything about how sources were selected, you
 just need to know those aspects of selection that project most strongly
 onto the matters of great interest.
+If you are presented with survey data that were selected badly,
+it is still possible to make a conditional likelihood function that can be
+used for inference, but at information-theoretic cost.
 \end{abstract}
 
 \keywords{\raggedright
- foo
+ catalogs
  ---
- bar
+ methods:~observational
+ ---
+ methods:~statistical
+ ---
+ surveys
+ ---
+ techniques:~spectroscopic
+ ---
+ telescopes
 }
 
 \section{Why target selection matters}
