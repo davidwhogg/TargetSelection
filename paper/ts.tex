@@ -16,6 +16,7 @@
 \documentclass[modern]{aastex62}
 % \usepackage{graphicx, xcolor}
 % \usepackage[sort&compress]{natbib}
+\usepackage{amsmath}
 
 % units macros
 \newcommand{\unit}[1]{\mathrm{#1}}
@@ -263,15 +264,20 @@ factors:
 In the ideal case, the population-level parameters $\theta$ generate the
 objects of interst.
 That is, the parameters $\theta$ parameterize a probability density
-function for the true properties $\set{z_m}$ of all of the stars $m$
+function (pdf) $p_0(\set{z_m}\given\theta)$
+for the true properties $\set{z_m}$ of all of the sources $m$
 in the Galaxy (we will posit for now that the objects of study are
 stars in the Milky Way; they could be galaxies in the Universe or
 planets in the solar neighborhood or anything else).
-This is the first factor.
+This is the first factor; we subscript it with a $0$ to indicate that
+this is a model of the true world;
+it is the pdf you would observe if you saw everything perfectly.
+
+HOGG: HERE I THINK WE HAVE TO GO POISSON AND NOTE THAT WE ARE THEREBY KILLING SPATIAL STATS.
 
 The second factor is
 a noise model $p(y_m\given z_m)$, which gives a probability density for
-observing observed properties $y_m$ for star $m$ under the assumption
+observing observed properties $y_m$ for source $m$ under the assumption
 that it has true properties $z_m$.
 In the case that the true properties are things like true brightnesses
 and true colors for the stars, this noise model $p(y_m\given z_m)$ is
@@ -287,7 +293,13 @@ This selection function is the subject of this \documentname.
 We want to construct our project such that this selection function can
 be approximated accurately and tractably.
 
-These three factors combine into a likelihood function as follows:
+These three factors combine into the complete, marginalized likelihood
+function $p(\set{y_m}\given\theta)$ as follows:
+\begin{align}
+p(\set{y_m, z_m}\given\theta) &= foo
+\\
+p(\set{y_m}\given\theta) &= \int\!\int\!\int\!\cdots\int p(\set{y_m, z_m}\given\theta)\,\prod_m\dd z_m
+\end{align}
 
 HOGG: SYNTACTICAL REFERENCE POINT
 
