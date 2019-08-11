@@ -50,7 +50,7 @@
 %\DeclareGraphicsExtensions{.pdf,.eps,.png}
 
 \title{\textbf{%
-Source selection for catalogs and follow-up:\\
+Source selection for catalogs and spectroscopic follow-up:\\
 General requirements for statistical and legacy value%
 }}
 
@@ -231,12 +231,25 @@ them ``fiducials'' for what follows?}
 As we say above, we imagine that we are designing a catalog or a targeted
 spectroscopic project
 with population-level statistical goals, for example XXX or YYY.
-However the data analysis is going to proceed, it is useful to think in
+Here we will imagine that the model of the population (for example the model
+of XXX or YYY) has parameters $\theta$.
+These parameters $\theta$ describe the properties of the true distribution
+of astronomical objects (galaxies, stars, supernovae, planets, or whatever)
+that would be oberved if we could see everything of interest completely and
+with high fidelity.
+The object (by assumption) is to determine these population-level parameters
+$\theta$.
+
+Independently of how the data analysis is going to proceed, it is nonetheless
+useful to think in
 terms of a \emph{likelihood function}, or probability for the data given
-the parameters of interest.
+the parameters $\theta$ of interest.
 The likelihood function is the critical tool for Bayesian inference, and
 it is also the critical tool for constructing frequentist estimators that
 saturate information-theoretic bounds.
+It also follows that if the investigator \emph{can} write a likelihood
+function, then the investigator does know enough about the data to perform
+any kind of information-saturating inference.
 Therefore, we maximize statistical legacy value for a statistical project
 when we make it possible for investigators to construct a justifiable and
 computationally tractable likelihood function.
