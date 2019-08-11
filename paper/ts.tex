@@ -50,7 +50,7 @@
 %\DeclareGraphicsExtensions{.pdf,.eps,.png}
 
 \title{\textbf{%
-Target selection for spectroscopic surveys:\\
+Source selection for catalogs and follow-up:\\
 General requirements for statistical and legacy value%
 }}
 
@@ -65,17 +65,16 @@ General requirements for statistical and legacy value%
 
 \begin{abstract}\noindent
 % context
-Many new spectroscopic projects are being built and operated
+Many new large cataloging and mapping projects are being built and operated
 in the areas of
 large-scale structure, Milky Way cartography, stellar physics,
 exoplanet discovery, and explosive transients.
-These must pre-select sources
-for spectroscopic observation, from prior imaging (and spectroscopic)
-data.
-They also have in common that they want their results to be useful for
+These must select sources from imaing (and other) data for inclusion
+in the catalog or study, or for spectroscopic follow-up observation.
+These projects generally want their results to be useful for
 statistics, population inferences, and legacy use in future projects.
 % aims
-Here we lay out some general principles for target selection that will
+Here we lay out some general principles for source selection that will
 create this legacy value.
 % methods
 The key idea, from which all principles flow, is that the survey must
@@ -83,7 +82,7 @@ be able to produce a computationally tractable
 likelihood function for parameters of interest.
 This, in turn, recommends that selection be performed such that it is possible
 to construct a relatively simple selection function, or a probability
-with which any source (real or counter-factual) would have been observed
+with which any source (real or counter-factual) would have been selected
 in a repeat of the survey.
 % results
 Among our findings and recommendations are the following:
@@ -114,7 +113,7 @@ used for inference, but at information-theoretic cost.
  telescopes
 }
 
-\section{Why target selection matters}
+\section{Why source selection matters}
 
 Many projects in conteporary astrophysics proceed by obtaining
 wide-field imaging and then selecting targets for spectroscopic
@@ -138,49 +137,54 @@ spectroscopic data they take, and equally (or even more importantly)
 on the way the spectroscopic targets were selected from the original
 imaging data.
 
-Once a project is taking thousands to millions of spectra, the
+
+
+Once a project is building a catalog with thousands to millions of entries, the
 end-to-end uncertainties in the results it produces tend to be
 dominated not by the shot noise (square-root-of-$N$) or sample size,
 but rather the ability to understand the selection effects.
 That is, to make precise measurements of a population of galaxies or
 stars or planets, we need to know what galaxies or stars or planets
-were and were not selected for spectroscopic targeting, and what would
-have been observed differently if the population of interest had been
+were and were not selected, and what would
+have been selected differently if the population of interest had been
 different.
 That is, we need to understand the \emph{selection function} of the
 survey.
 We will say more about this below, but the selection function is,
 loosely, the probability that a source on the sky would have been
-observed, conditioned on the
+included, conditioned on the
 position and physical or observational properties of that source.
 The object of this \documentname\ is to elucidate the aspects of
-target selection are most relevant to understanding and obtaining a
+source selection are most relevant to understanding and obtaining a
 computationally tractable model of the selection function.
 
-Even when a spectroscopic project is beautifully designed and
+Even when a project is beautifully designed and
 executed, it isn't always possible to understand or model this
 selection function accurately.
-For example, when targets for spectroscopy are selected by hand or by
-a human process or human classification, it is often difficult to
-figure out what would or would not have been observed in different
+For example, when sources are selected by hand or by
+a human process or including a human classification or vetting, it is often difficult to
+figure out what would or would not have been included in different
 (counter-factual) situations.
-For another, when each target is chosen in a way that depends strongly
-on properties of that target that are difficult to understand within
+For another, when each source is chosen in a way that depends strongly
+on properties of that source that are difficult to understand within
 the context of the physical model, it is difficult to build a useful
 model of the selection function.
 It might be accurate, but not useful!
-For another, when one target's selection depends on the properties
-of other sources in the vicinity of that target, the selection
+For another, when one source's selection depends on the properties
+of other sources in the vicinity of that source, the selection
 function might depend on spatial structures that are hard to model or
 hard to manipulate computationally.
-For yet another, when a survey is beautifully targetted, but has low
-\foreign{a posteriori} success rate on its targets, the selection
+For yet another, when a survey is beautifully selected \foreign{a priori},
+but has low
+\foreign{a posteriori} success rate on follow-up observations that
+are required for inclusion in the catalog, the selection
 function might depend on properties of the sources that are hard to
 understand or model.
 
-In this \documentname, we develop guidelines for target selection
+In this \documentname, we develop guidelines for source selection and
+catalog generation
 that, if followed, will improve the chances that it will be possible
-to build a simple and accurate selection function.
+to build a simple and accurate selection function model.
 This, in turn, will improve the chances that the resulting data
 will be useful for building a precise model of the relevant source
 population.
@@ -188,14 +192,13 @@ This, in turn, increases the value of the project for its investigators,
 and the legacy value for the community.
 
 In what follows, we make some assumptions about what's important,
-scientifically, about the spectroscopic project of interest, and what
-is not.
+scientifically, about the project of interest, and what is not.
 We will assume that the project wants to understand statistical properties
 of the objects under study.
 For example, the mean density of galaxies, or the fraction of galaxies
 of different types in different environments;
 or the relative rates of different types of supernovae;
-or the density of stars as a function of radius in the Milky Way disk;
+or the density of stars as a function of chemical abundances and radius in the Milky Way disk;
 or the rate at which stars host planets in a certain mass and period range.
 But we will also assume that the project cares about these goals more,
 or equally with, discovery rate or sample purity.
@@ -205,13 +208,11 @@ purity.
 This is because we will put restrictions on what can be used for
 selection, and those restrictions will come at the cost of some
 opportunities to improve purity.
-We will also assume (in this \documentname) that the survey is making
-single visits, or multiple visits without adapting to prior
-spectroscopic results.
-That is, our discussion will not apply very usefully to adaptive
-time-domain surveys, which take some spectroscopic data and use that
-data to decide whether or not to take more data.
-This makes our discussion less useful to those following up exoplanet
+We will also assume (in this \documentname) that the survey is performing
+its sample selection in a single pass, not adaptively, using some
+targetted observations, using these to refine the target sample, and
+iterating observationally.
+This makes our discussion less useful to those spectroscopically following up exoplanet
 candidates and supernovae, the characterization of which evolves with
 the number of spectroscopic epochs.
 It is possible to generalize what's presented here to this time-dependent, adaptive
@@ -227,7 +228,8 @@ them ``fiducials'' for what follows?}
 
 \section{The selection function}
 
-As we say above, we imagine that we are designing a spectroscopic project
+As we say above, we imagine that we are designing a catalog or a targeted
+spectroscopic project
 with population-level statistical goals, for example XXX or YYY.
 However the data analysis is going to proceed, it is useful to think in
 terms of a \emph{likelihood function}, or probability for the data given
