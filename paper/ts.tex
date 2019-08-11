@@ -6,7 +6,9 @@
 % - make a to-do list
 % - make style notes
 % - should we have an ``open issues'' section?
-% - 
+% - do we say what ``counterfactual'' means in this context?
+% - separate high snr from low snr selections?
+% - ...
 
 % Style notes
 % - 
@@ -24,6 +26,7 @@
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\T}{^{\mathsf{T}}}
 \newcommand{\given}{\,|\,}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
 
 % chemical macros
 \newcommand{\abundance}[2]{\mathrm{\left[{#1}/{#2}\right]}}
@@ -137,7 +140,8 @@ spectroscopic data they take, and equally (or even more importantly)
 on the way the spectroscopic targets were selected from the original
 imaging data.
 
-
+More generally, whenever a set of astronomical sources has been chosen
+for study... assembled into a catalog... HOGG
 
 Once a project is building a catalog with thousands to millions of entries, the
 end-to-end uncertainties in the results it produces tend to be
@@ -226,7 +230,7 @@ that are also out of scope here.
 \textbf{HWR: Should we explain some example scientific goals here, and make
 them ``fiducials'' for what follows?}
 
-\section{The selection function}
+\section{The likelihood function and the selection function}
 
 As we say above, we imagine that we are designing a catalog or a targeted
 spectroscopic project
@@ -254,13 +258,40 @@ Therefore, we maximize statistical legacy value for a statistical project
 when we make it possible for investigators to construct a justifiable and
 computationally tractable likelihood function.
 
+For our purposes here, the likelihood function factorizes into three
+factors:
+In the ideal case, the population-level parameters $\theta$ generate the
+objects of interst.
+That is, the parameters $\theta$ parameterize a probability density
+function for the true properties $\set{z_m}$ of all of the stars $m$
+in the Galaxy (we will posit for now that the objects of study are
+stars in the Milky Way; they could be galaxies in the Universe or
+planets in the solar neighborhood or anything else).
+This is the first factor.
+
+The second factor is
+a noise model $p(y_m\given z_m)$, which gives a probability density for
+observing observed properties $y_m$ for star $m$ under the assumption
+that it has true properties $z_m$.
+In the case that the true properties are things like true brightnesses
+and true colors for the stars, this noise model $p(y_m\given z_m)$ is
+very simple (it is just the noise properties of the data.
+This noise model is more complex if the true properties are things like
+stellar masses or ages, where the connection to the noisy observables is
+less direct.
+
+The third factor is a selection function, or a probability $P(y_m,
+z_m)$ that gives the probability that the star was included in the
+catalog, given its observed or true properties (or both).
+This selection function is the subject of this \documentname.
+We want to construct our project such that this selection function can
+be approximated accurately and tractably.
+
+These three factors combine into a likelihood function as follows:
+
 HOGG: SYNTACTICAL REFERENCE POINT
 
-Define the nomenclature.
-
 Define the Poisson likelihood, including the overal normalization, which matters here.
-
-There are data and features and selection as a function of features.
 
 There is an \foreign{a priori} selection function and an \foreign{a posteriori}
 selection function. You can only control one of these fully, unless you have near-unit
@@ -270,12 +301,11 @@ Here might be the place to note that the selection function has to something of
 which we can ask \emph{counterfactual} questions. It can't just be defined at
 the locations of the data.
 
-\section{The likelihood principle}
+Here we should also bring up the idea of confounders. If you think the SF
+is S(x) but it is actually S(x, w) and you don't track or can't predict w,
+then you can't write an accurate LF.
 
-Bayesian likelihood principle and frequentist optimal estimators.
-
-Relationship between likelihood and forward model. Relationship between
-likelihood and noise model.
+\section{Correct the data or correct the model?}
 
 This section should include the point that the tradition is to divide out
 the selection function. That's not good, for divide-by-zero or variance
@@ -285,10 +315,6 @@ The divide-by-selection-function methods have the great property that you don't 
 to know the SF everywhere. You only need to know it at your data. But then
 it can't penalize models that put high weight on locations with near-zero
 completeness. That is, it is biased in these regions and wrong.
-
-Here we should also bring up the idea of confounders. If you think the SF
-is S(x) but it is actually S(x, w) and you don't track or can't predict w,
-then you can't write an accurate LF.
 
 \section{Information theory}
 
