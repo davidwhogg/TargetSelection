@@ -273,9 +273,32 @@ This is the first factor; we subscript it with a $0$ to indicate that
 this is a model of the true world;
 it is the pdf you would observe if you saw everything perfectly.
 
-HOGG: HERE I THINK WE HAVE TO GO POISSON AND NOTE THAT WE ARE THEREBY KILLING SPATIAL STATS.
+The population model $p_0(\set{z_m}\given\theta)$ could have any arbitrarily
+complicated form.
+However, for our purposes here, we are going to assume it has a certain kind
+of separability.
+That is, we are going to assume that the objects are conditionally independent,
+or independently drawn, conditioned on the parameters $\theta$.
+This is like saying that the model is a variable-rate Poisson process.
+Under this assumption, the model can be written as a product over sources, like so:
+\begin{align}
+    p_0(\set{z_m}\given\theta) &= \exp -Q(\theta)\,\prod_m p_0(z_m\given\theta) \\
+\ln p_0(\set{z_m}\given\theta) &= \sum_m \ln p_0(z_m\given\theta) - Q(\theta)
+\end{align}
+where $Q(\theta)$ is a normalization factor that we will discuss below
+(after we have introduced the selection function), and the individual-source
+models $p_0(z_m\given\theta)$ represent the pdfs for individual
+sources given the population parameters $\theta$.
+This assumption---that the population model can be written as a product over
+sources---is used frequently in astrophysics projects.
+In this approximation, there can be no information two-point or
+higher-order statistics of the data; or nothing can be learned from
+source pairs that can't be learned combining information from the
+individual members of those pairs.
+Among other things, this formalism or assumption is at odds with
+models that specify source--source correlation functions.
 
-The second factor is
+The second factor in the likelihood function is
 a noise model $p(y_m\given z_m)$, which gives a probability density for
 observing observed properties $y_m$ for source $m$ under the assumption
 that it has true properties $z_m$.
@@ -291,7 +314,8 @@ ASSUMPTION OF INDEPENDENCE OF SOURCES! It also assumes that you can
 model them; so be careful when you use complex quantities (for example
 ratios of things or SNRs).
 
-The third factor is a selection function, or a probability $P(y_m,
+The third factor in the likelihood function is the selection function.
+This is a probability $P(y_m,
 z_m)$ that gives the probability that the star was included in the
 catalog, given its observed or true properties (or both).
 This selection function is the subject of this \documentname.
