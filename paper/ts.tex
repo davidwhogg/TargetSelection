@@ -8,6 +8,7 @@
 % - should we have an ``open issues'' section?
 % - do we say what ``counterfactual'' means in this context?
 % - separate high snr from low snr selections?
+% - make sure to cite exopop, loredo, and blogpost.
 % - ...
 
 % Style notes
@@ -371,6 +372,17 @@ Here we should also bring up the idea of confounders. If you think the SF
 is S(x) but it is actually S(x, w) and you don't track or can't predict w,
 then you can't write an accurate LF.
 
+%% %% DFM writes (2019-08-12):
+%% I don't know of any other good examples, but (this might be beyond the
+%% scope, but) I'd be very interested to hear what you guys come up with
+%% when trying to combine these ideas with uncertainty propagation. Tom
+%% Loredo and Will Farr both have lots of ideas about this (but not much
+%% that has actually been published as far as I can tell) and it's pretty
+%% subtle! The root question is - does the selection function just enter
+%% in the exponent or also in the product (y'know). I think that it could
+%% enter both places depending on your model assumptions, but I'm not
+%% sure.
+
 \section{Correct the data or correct the model?}
 
 This section should include the point that the tradition is to divide out
@@ -436,8 +448,11 @@ adjust or weaken or don't obey these.
 
 For example, what of this discussion carries over to two-point functions?
 
-\acknowledgements It is a pleasure to thank the \project{Milky Way
-  Mapper} Collaboration for help with refining these principles.
+\acknowledgements We thank the \project{Milky Way
+  Mapper} Collaboration (part of the \project{SDSS-V} Collaboration)
+for help with refining these principles.
+This work benefitted from our conversations with
+  Dan Foreman-Mackey (Flatiron).
 
 \facilities{
 ESA \project{Gaia},
@@ -449,7 +464,10 @@ bar
 }
 
 \begin{thebibliography}{}
-\bibitem[De Silva \etal(2015)]{galah} De Silva, G.~M., Freeman, K.~C., Bland-Hawthorn, J., \etal\ 2015, \mnras, 449, 2604 
+\bibitem[De Silva \etal(2015)]{galah} De Silva, G.~M., Freeman, K.~C., Bland-Hawthorn, J., \etal, 2015, \mnras, 449, 2604 
+\bibitem[Foreman-Mackey (2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
+\bibitem[Foreman-Mackey \etal(2014)]{exopop} Foreman-Mackey, D., Hogg, D.~W., \& Morton, T.~D., 2014, \apj, 795, 64
+\bibitem[Loredo \& Wasserman(1995)]{loredo} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
 \end{thebibliography}
 
 \end{document}
