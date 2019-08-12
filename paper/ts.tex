@@ -261,19 +261,22 @@ computationally tractable likelihood function.
 
 For our purposes here, the likelihood function factorizes into three
 factors:
-In the ideal case, the population-level parameters $\theta$ generate the
-objects of interst.
+The first factor is the population model.
+We assume that the population-level parameters $\theta$ generate the
+sources of interst.
 That is, the parameters $\theta$ parameterize a probability density
 function (pdf) $p_0(\set{z_m}\given\theta)$
 for the true properties $\set{z_m}$ of all of the sources $m$
 in the Galaxy (we will posit for now that the objects of study are
 stars in the Milky Way; they could be galaxies in the Universe or
 planets in the solar neighborhood or anything else).
-This is the first factor; we subscript it with a $0$ to indicate that
+This is the first of the three factors that make up the likelihood
+function.
+We subscript it with a $0$ to indicate that
 this is a model of the true world;
 it is the pdf you would observe if you saw everything perfectly.
 
-The population model $p_0(\set{z_m}\given\theta)$ could have any arbitrarily
+This population model $p_0(\set{z_m}\given\theta)$ could have any arbitrarily
 complicated form.
 However, for our purposes here, we are going to assume it has a certain kind
 of separability.
@@ -308,11 +311,29 @@ very simple (it is just the noise properties of the data.
 This noise model is more complex if the true properties are things like
 stellar masses or ages, where the connection to the noisy observables is
 less direct.
+This noise model depends in detail on having a good model for how the
+observing instrumentation works, or in fact how the whole chain of causation
+works from the true properties $z_m$ to the observed values $y_m$.
+If this model contains uncertain parameters (unknown gains, say, or
+unknown read noise, or \foreign{etc.}), then this function
+$p(y_m\given z_m)$ could be conditioned on additional noise-model
+parameters and these could be fit or inferred or marginalized out
+simultaneously with the population-level parameters $\theta$. WE MAY
+RETURN TO THIS LATER.
 
-HOGG: NOTE HERE THAT THIS FORM $p(y_m\given z_m)$ ALREADY MAKES AN
-ASSUMPTION OF INDEPENDENCE OF SOURCES! It also assumes that you can
-model them; so be careful when you use complex quantities (for example
-ratios of things or SNRs).
+It is worth emphasizing an assumption here:
+By writing this noise model at the individual-source level as
+$p(y_m\given z_m)$
+and not at the whole-catalog level
+$p(\set{y_m}\given\set{z_m})$,
+we have assumed that the observed properties $y_m$ of source $m$
+depend only on the true properties $z_m$ \emph{of that source}.
+This is another kind of assumption of independence:
+Technically this independence can be broken in real surveys by,
+for example, calibration noise, which correlates the wrongness of
+every source in some patch.
+But we make this assumption because it is often very close to being
+correct, and it keeps the likelihood function (below) tractable.
 
 The third factor in the likelihood function is the selection function.
 This is a probability $P(y_m,
