@@ -244,15 +244,23 @@ been selected for the catalog, as a function of that source's properties.
 The reason that this is our goal---the reason that we want a selection
 function---is that we need it to perform population-level inferences.
 More technically, we need it to construct a likelihood function, as we
-will argue in the next \sectionname, and we need that likelihood
+will argue in \sectionname~\ref{sec:lf}, and we need that likelihood
 function in order to make information-theory-optimal inferences.
+
 But even if we don't want to be information-theory optimal: The
 selection function is the ratio of what is observed to the whole
 population, so any inference about or reconstruction of the whole
 population will require it.
+That is, we will either multiply our theory of the world by this
+selection function, or we will divide our data by it, before we
+compare theory to data.
+One of these (the former) is much to be preferred over the other, as
+we will argue in \sectionname~\ref{sec:correct}, but either way we
+need the selection function.
 
 In what follows, every source $n$ we could observe has two kinds of
-properties.  One is its true properties $z_n$, which are latent
+properties.
+One is its true properties $z_n$, which are latent
 properties (technically unobservable), and the other are its observed
 properties $y_n$, which are the instrument readings or outputs on that
 source, if such outputs are or were made.
@@ -273,7 +281,7 @@ the catalog, is in general a function of both the observed quantities
 $y_n$ and the latent quantities $z_n$.
 Some would disagree with this point (for example, there is a deep
 assumption in \citealt{loredo} that the selection can depend only on
-the observables $y_n$), but whether or not the true latents can come
+the observed data $y_n$), but whether or not the true latents can come
 in to the causal process of selection, they certainly might be involved
 in the process by which the selection function has been determined or
 estimated.
