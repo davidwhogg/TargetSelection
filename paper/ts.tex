@@ -8,7 +8,7 @@
 % - should we have an ``open issues'' section?
 % - do we say what ``counterfactual'' means in this context?
 % - separate high snr from low snr selections?
-% - make sure to cite exopop, loredo, and blogpost.
+% - make sure to cite exopop, loredogrb, loredo, bovy, and blogpost.
 % - ...
 
 % Style notes
@@ -44,10 +44,11 @@
 \newcommand{\etal}{\foreign{et al.}}
 
 % margins and headers and spacing changes
-\setlength{\parindent}{1.4em} % trust in Hogg
-\addtolength{\topmargin}{-0.4in}
-\addtolength{\textheight}{0.8in}
-\shorttitle{desiderata for target selection}
+\renewcommand{\twocolumngrid}{}  % trust in Hogg -- bibliography fix
+\setlength{\parindent}{1.4em}    % trust in Hogg -- make indents look like squares
+\addtolength{\topmargin}{-0.4in} % trust in Hogg -- taller page
+\addtolength{\textheight}{0.8in} % trust in Hogg -- taller page
+\shorttitle{requirements for source selection}
 \shortauthors{hogg \& rix}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
@@ -124,7 +125,8 @@ Many projects in conteporary astrophysics proceed by obtaining
 wide-field imaging and then selecting targets for spectroscopic
 follow-up.
 This mode is very old, but it became truly data-intensive with
-the \project{2dF} (CITE) and \project{Sloan Digital Sky Survey} (CITE)
+the \project{Sloan Digital Sky Survey} (\citealt{sdss})
+and \project{2dF} (\citealt{2df})
 projects, which mapped the large-scale structure to test and learn the
 cosmological model.
 Now there are projects with this character in a range of different
@@ -396,6 +398,8 @@ completeness. That is, it is biased in these regions and wrong.
 
 \section{The easy case: Selection with excellent data}
 
+\section{Contamination and backgrounds}
+
 \section{Information theory}
 
 Once you have a LF you can start saying things about information.
@@ -464,10 +468,14 @@ bar
 }
 
 \begin{thebibliography}{}
-\bibitem[De Silva \etal(2015)]{galah} De Silva, G.~M., Freeman, K.~C., Bland-Hawthorn, J., \etal, 2015, \mnras, 449, 2604 
+\bibitem[Bovy \etal(2012)]{bovy} Bovy, J., Rix, H.-W., Liu, C., \etal, 2012, \apj, 753, 148
+\bibitem[Colless \etal(2001)]{2df} Colless, M., Dalton, G., Maddox, S., \etal, 2001, \mnras, 328, 1039
 \bibitem[Foreman-Mackey (2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
 \bibitem[Foreman-Mackey \etal(2014)]{exopop} Foreman-Mackey, D., Hogg, D.~W., \& Morton, T.~D., 2014, \apj, 795, 64
-\bibitem[Loredo \& Wasserman(1995)]{loredo} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
+\bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal, 2017, arXiv e-prints, arXiv:1711.03234
+\bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
+\bibitem[Loredo(2004)]{loredo} Loredo, T.~J., 2004, American Institute of Physics Conference Series, 195
+\bibitem[York \etal(2000)]{sdss} York, D.~G., Adelman, J., Anderson, J.~E., \etal, 2000, \aj, 120, 1579
 \end{thebibliography}
 
 \end{document}
