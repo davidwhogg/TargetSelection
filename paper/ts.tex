@@ -119,7 +119,7 @@ used for inference, but at information-theoretic cost.
  telescopes
 }
 
-\section{Why source selection matters}
+\section{Why source selection matters}\label{sec:why}
 
 Many projects in conteporary astrophysics proceed by obtaining
 wide-field imaging and then selecting targets for spectroscopic
@@ -234,12 +234,12 @@ that are also out of scope here.
 \textbf{HWR: Should we explain some example scientific goals here, and make
 them ``fiducials'' for what follows?}
 
-\section{The selection function}
+\section{The selection function}\label{sec:sf}
 
 Our goal is to select our sources such that it is possible to
 construct a computationally tractable and relatively accurate model of
-the selection function, or the probability that a source would have
-selected for the catalog, as a function of that source's properties.
+the selection function $S$, or the probability that a source would have
+been selected for the catalog, as a function of that source's properties.
 The reason that this is our goal---the reason that we want a selection
 function---is that we need it to perform population-level inferences.
 More technically, we need it to construct a likelihood function, as we
@@ -255,25 +255,49 @@ properties.  One is its true properties $z_n$, which are latent
 properties (technically unobservable), and the other are its observed
 properties $y_n$, which are the instrument readings or outputs on that
 source, if such outputs are or were made.
-In general $y_n$ and $z_n$ as vectors or blobs of properties.
+In general $y_n$ and $z_n$ will be vectors or blobs of properties.
 For concreteness, you could think of the $z_n$ as being the true
 temperature, surface gravity, composition, and position (in phase
-space) of a star, and the $x_n$ as the measured brightness of the star
+space) of a star, and the $y_n$ as the measured brightness of the star
 in various passbands, plus maybe measured parallax and proper motion.
 Or, even simpler, the $z_n$ could be the true brightnesses that would
 have been measured with much better measurements (perfect data), and
-the $y_n$ are the actual measurements we got.
+the $y_n$ are the actual measurements we got of those brightnesses.
 
 In principle, the appearance of the source in our catalog can depend
-on either or both of these things.
+on either or both of these things (true and observed).
 That is, the selection function $S(y_n, z_n)$, which delivers the
 probability that a source with these properties would be included in
 the catalog, is in general a function of both the observed quantities
 $y_n$ and the latent quantities $z_n$.
+Some would disagree with this point (for example, there is a deep
+assumption in \citealt{loredo} that the selection can depend only on
+the observables $y_n$), but whether or not the true latents can come
+in to the causal process of selection, they certainly might be involved
+in the process by which the selection function has been determined or
+estimated.
+That is, in some cases the function $S()$ is a function of the latents $z_n$
+\emph{by construction}.
+We will return to this point in \sectionname~\ref{sec:estimate},
+where we discuss the determination or estimation of the selection
+function.
+Suffice it to say that in the \textsl{Real World~(tm)} the selection
+function $S(y_n, z_n)$ you actually have can be a function of both the
+observables $y_n$ and the latents $z_n$.
 
 HOGG SYNTACTICAL REFERENCE
 
-\section{The likelihood function}
+HOGG talk about factorization into \foreign{a priori} and \foreign{a posteriori} parts.
+
+HOGG talk about independence here.
+
+HOGG talk about trying to make this all about observables; it will help.
+
+HOGG mention that it will need to be a function of things you \emph{can} model!
+
+HOGG is there some point to talking about possible confounders or incomplete information here?
+
+\section{The likelihood function}\label{sec:lf}
 
 As we posited above, we are designing a catalog or a targeted
 spectroscopic project
@@ -382,6 +406,8 @@ described in the previous \sectionname.
 This is the function $S(y_n,z_n)$ that gives the probability that a source was included in the
 catalog, given its observed or true properties (or both).
 
+HOGG: SYNTACTICAL REFERENCE POINT
+
 HOGG: Note that $p(a\given b)$ is a pdf for $a$ given $b$; it obeys
 $\int p(a\given b)\,\dd a = 1$ and $S(a,b)$ is a pure probability; it
 obeys $0<S(a, b)<1$.
@@ -396,8 +422,6 @@ p(\set{y_n, z_n}\given\theta) &= foo
 \\
 p(\set{y_n}\given\theta) &= \int\!\int\!\int\!\cdots\int p(\set{y_n, z_n}\given\theta)\,\prod_n\dd z_n
 \end{align}
-
-HOGG: SYNTACTICAL REFERENCE POINT
 
 Define the Poisson likelihood, including the overal normalization, which matters here.
 
@@ -424,7 +448,7 @@ then you can't write an accurate LF.
 %% enter both places depending on your model assumptions, but I'm not
 %% sure.
 
-\section{Correct the data or correct the model?}
+\section{Correct the data or correct the model?}\label{sec:correct}
 
 This section should include the point that the tradition is to divide out
 the selection function. That's not good, for divide-by-zero or variance
@@ -435,11 +459,13 @@ to know the SF everywhere. You only need to know it at your data. But then
 it can't penalize models that put high weight on locations with near-zero
 completeness. That is, it is biased in these regions and wrong.
 
-\section{The easy case: Selection with excellent data}
+\section{The easy case: Selection with excellent data}\label{sec:easy}
 
-\section{Contamination and backgrounds}
+\section{Contamination and backgrounds}\label{sec:bg}
 
-\section{Information theory}
+\section{How do you measure or test the selection function?}\label{sec:estimate}
+
+\section{How well do you need to know the selection function?}\label{sec:quality}
 
 Once you have a LF you can start saying things about information.
 
