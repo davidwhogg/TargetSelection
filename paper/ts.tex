@@ -234,11 +234,50 @@ that are also out of scope here.
 \textbf{HWR: Should we explain some example scientific goals here, and make
 them ``fiducials'' for what follows?}
 
-\section{The likelihood function and the selection function}
+\section{The selection function}
 
-As we say above, we imagine that we are designing a catalog or a targeted
+Our goal is to select our sources such that it is possible to
+construct a computationally tractable and relatively accurate model of
+the selection function, or the probability that a source would have
+selected for the catalog, as a function of that source's properties.
+The reason that this is our goal---the reason that we want a selection
+function---is that we need it to perform population-level inferences.
+More technically, we need it to construct a likelihood function, as we
+will argue in the next \sectionname, and we need that likelihood
+function in order to make information-theory-optimal inferences.
+But even if we don't want to be information-theory optimal: The
+selection function is the ratio of what is observed to the whole
+population, so any inference about or reconstruction of the whole
+population will require it.
+
+In what follows, every source $n$ we could observe has two kinds of
+properties.  One is its true properties $z_n$, which are latent
+properties (technically unobservable), and the other are its observed
+properties $y_n$, which are the instrument readings or outputs on that
+source, if such outputs are or were made.
+In general $y_n$ and $z_n$ as vectors or blobs of properties.
+For concreteness, you could think of the $z_n$ as being the true
+temperature, surface gravity, composition, and position (in phase
+space) of a star, and the $x_n$ as the measured brightness of the star
+in various passbands, plus maybe measured parallax and proper motion.
+Or, even simpler, the $z_n$ could be the true brightnesses that would
+have been measured with much better measurements (perfect data), and
+the $y_n$ are the actual measurements we got.
+
+In principle, the appearance of the source in our catalog can depend
+on either or both of these things.
+That is, the selection function $S(y_n, z_n)$, which delivers the
+probability that a source with these properties would be included in
+the catalog, is in general a function of both the observed quantities
+$y_n$ and the latent quantities $z_n$.
+
+HOGG SYNTACTICAL REFERENCE
+
+\section{The likelihood function}
+
+As we posited above, we are designing a catalog or a targeted
 spectroscopic project
-with population-level statistical goals, for example XXX or YYY.
+with population-level statistical goals, for example HOGG XXX or YYY.
 Here we will imagine that the model of the population (for example the model
 of XXX or YYY) has parameters $\theta$.
 These parameters $\theta$ describe the properties of the true distribution
@@ -248,7 +287,7 @@ with high fidelity.
 The object (by assumption) is to determine these population-level parameters
 $\theta$.
 
-Independently of how the data analysis is going to proceed, it is nonetheless
+No matter how the data analysis is going to proceed, it is nonetheless
 useful to think in
 terms of a \emph{likelihood function}, or probability for the data given
 the parameters $\theta$ of interest.
@@ -268,8 +307,8 @@ The first factor is the population model.
 We assume that the population-level parameters $\theta$ generate the
 sources of interst.
 That is, the parameters $\theta$ parameterize a probability density
-function (pdf) $p_0(\set{z_m}\given\theta)$
-for the true properties $\set{z_m}$ of all of the sources $m$
+function (pdf) $p_0(\set{z_n}\given\theta)$
+for the true properties $\set{z_n}$ of all of the sources $n$
 in the Galaxy (we will posit for now that the objects of study are
 stars in the Milky Way; they could be galaxies in the Universe or
 planets in the solar neighborhood or anything else).
@@ -279,7 +318,7 @@ We subscript it with a $0$ to indicate that
 this is a model of the true world;
 it is the pdf you would observe if you saw everything perfectly.
 
-This population model $p_0(\set{z_m}\given\theta)$ could have any arbitrarily
+This population model $p_0(\set{z_n}\given\theta)$ could have any arbitrarily
 complicated form.
 However, for our purposes here, we are going to assume it has a certain kind
 of separability.
@@ -288,12 +327,12 @@ or independently drawn, conditioned on the parameters $\theta$.
 This is like saying that the model is a variable-rate Poisson process.
 Under this assumption, the model can be written as a product over sources, like so:
 \begin{align}
-    p_0(\set{z_m}\given\theta) &= \exp -Q(\theta)\,\prod_m p_0(z_m\given\theta) \\
-\ln p_0(\set{z_m}\given\theta) &= \sum_m \ln p_0(z_m\given\theta) - Q(\theta)
+    p_0(\set{z_n}\given\theta) &= \exp -Q(\theta)\,\prod_n p_0(z_n\given\theta) \\
+\ln p_0(\set{z_n}\given\theta) &= \sum_n \ln p_0(z_n\given\theta) - Q(\theta)
 \end{align}
 where $Q(\theta)$ is a normalization factor that we will discuss below
 (after we have introduced the selection function), and the individual-source
-models $p_0(z_m\given\theta)$ represent the pdfs for individual
+models $p_0(z_n\given\theta)$ represent the pdfs for individual
 sources given the population parameters $\theta$.
 This assumption---that the population model can be written as a product over
 sources---is used frequently in astrophysics projects.
@@ -305,32 +344,32 @@ Among other things, this formalism or assumption is at odds with
 models that specify source--source correlation functions.
 
 The second factor in the likelihood function is
-a noise model $p(y_m\given z_m)$, which gives a probability density for
-observing observed properties $y_m$ for source $m$ under the assumption
-that it has true properties $z_m$.
+a noise model $p(y_n\given z_n)$, which gives a probability density for
+observing observed properties $y_n$ for source $n$ under the assumption
+that it has true properties $z_n$.
 In the case that the true properties are things like true brightnesses
-and true colors for the stars, this noise model $p(y_m\given z_m)$ is
+and true colors for the stars, this noise model $p(y_n\given z_n)$ is
 very simple (it is just the noise properties of the data.
 This noise model is more complex if the true properties are things like
 stellar masses or ages, where the connection to the noisy observables is
 less direct.
 This noise model depends in detail on having a good model for how the
 observing instrumentation works, or in fact how the whole chain of causation
-works from the true properties $z_m$ to the observed values $y_m$.
+works from the true properties $z_n$ to the observed values $y_n$.
 If this model contains uncertain parameters (unknown gains, say, or
 unknown read noise, or \foreign{etc.}), then this function
-$p(y_m\given z_m)$ could be conditioned on additional noise-model
+$p(y_n\given z_n)$ could be conditioned on additional noise-model
 parameters and these could be fit or inferred or marginalized out
 simultaneously with the population-level parameters $\theta$. WE MAY
 RETURN TO THIS LATER.
 
 It is worth emphasizing an assumption here:
 By writing this noise model at the individual-source level as
-$p(y_m\given z_m)$
+$p(y_n\given z_n)$
 and not at the whole-catalog level
-$p(\set{y_m}\given\set{z_m})$,
-we have assumed that the observed properties $y_m$ of source $m$
-depend only on the true properties $z_m$ \emph{of that source}.
+$p(\set{y_n}\given\set{z_n})$,
+we have assumed that the observed properties $y_n$ of source $n$
+depend only on the true properties $z_n$ \emph{of that source}.
 This is another kind of assumption of independence:
 Technically this independence can be broken in real surveys by,
 for example, calibration noise, which correlates the wrongness of
@@ -338,24 +377,24 @@ every source in some patch.
 But we make this assumption because it is often very close to being
 correct, and it keeps the likelihood function (below) tractable.
 
-The third factor in the likelihood function is the selection function.
-This is a probability $P(y_m,
-z_m)$ that gives the probability that the star was included in the
+The third factor in the likelihood function is the selection function,
+described in the previous \sectionname.
+This is the function $S(y_n,z_n)$ that gives the probability that a source was included in the
 catalog, given its observed or true properties (or both).
-This selection function is the subject of this \documentname.
-We want to construct our project such that this selection function can
-be approximated accurately and tractably.
 
 HOGG: Note that $p(a\given b)$ is a pdf for $a$ given $b$; it obeys
-$\int p(a\given b)\,\dd a = 1$ and $P(a,b)$ is a pure probability; it
-obeys $0<P(a, b)<1$.
+$\int p(a\given b)\,\dd a = 1$ and $S(a,b)$ is a pure probability; it
+obeys $0<S(a, b)<1$.
+
+HOGG: Note the independence assumption AGAIN. It came in three times, once
+for each factor.
 
 These three factors combine into the complete, marginalized likelihood
-function $p(\set{y_m}\given\theta)$ as follows:
+function $p(\set{y_n}\given\theta)$ as follows:
 \begin{align}
-p(\set{y_m, z_m}\given\theta) &= foo
+p(\set{y_n, z_n}\given\theta) &= foo
 \\
-p(\set{y_m}\given\theta) &= \int\!\int\!\int\!\cdots\int p(\set{y_m, z_m}\given\theta)\,\prod_m\dd z_m
+p(\set{y_n}\given\theta) &= \int\!\int\!\int\!\cdots\int p(\set{y_n, z_n}\given\theta)\,\prod_n\dd z_n
 \end{align}
 
 HOGG: SYNTACTICAL REFERENCE POINT
