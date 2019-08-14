@@ -38,6 +38,7 @@
 % text macros
 \newcommand{\documentname}{\textsl{Article}}
 \newcommand{\sectionname}{Section}
+\newcommand{\equationname}{equation}
 \newcommand{\code}[1]{\texttt{\detokenize{#1}}}
 \newcommand{\acronym}[1]{{\small{#1}}}
 \newcommand{\project}[1]{\textsl{#1}}
@@ -301,6 +302,13 @@ the locations of the data.
 
 \section{The likelihood function}\label{sec:lf}
 
+The reader who is interested in how to design a survey to obtain a
+good selection function can skip this \sectionname, and
+\sectionname~\ref{sec:easy}.
+These \sectionname s are here to provide the information-theory
+justification for having a simple independent selection function.
+This is fundamental, but not required reading.
+
 As we posited above, we are designing a catalog or a targeted
 spectroscopic project
 with population-level statistical goals, for example HOGG XXX or YYY.
@@ -445,28 +453,43 @@ These three factors combine into the complete, marginalized likelihood
 function $p(\set{y_n}\given\theta)$ as follows:
 \begin{gather}
 \ln p(\set{y_n}_{n=1}^{N}\given\theta)
- = \sum_n \ln\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n - Q(\theta)
+ = \sum_{n=1}^N \ln\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n - Q(\theta)
+\label{eq:lf}
 \\
 Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n\,\dd y_n
+\quad .
 \end{gather}
+This likelihood function is marginalized because we have integrated out
+the true latent properties $\set{z_n}_{n=1}^N$.
 
-HOGG SYNTACTICAL REFERENCE
-
-%% %% DFM writes (2019-08-12):
-%% I don't know of any other good examples, but (this might be beyond the
-%% scope, but) I'd be very interested to hear what you guys come up with
-%% when trying to combine these ideas with uncertainty propagation. Tom
-%% Loredo and Will Farr both have lots of ideas about this (but not much
-%% that has actually been published as far as I can tell) and it's pretty
-%% subtle! The root question is - does the selection function just enter
-%% in the exponent or also in the product (y'know). I think that it could
-%% enter both places depending on your model assumptions, but I'm not
-%% sure.
+This is the likelihood function used in our exoplanet populations
+work (\citealt{exopop}) HOGG OTHER CITATIONS?.
+It is not, however, the likelihood function used in some other but
+similar contexts (\citealt{loredogrb, loredo}).
+The difference is that in the latter projects, the selection function
+does not appear in the sum; it only appears in the normalization $Q(\theta)$.
+This difference flows from some different assumptions about how the
+data are generated.
+We are (effectively) assuming that the universe plus the survey are jointly
+working together to generate a data stream.
+That jointly generated data stream is being treated as a variable-rate Poisson
+process.
+The work that removes the selection function $S(\cdot)$ from the sum
+makes the assumption that the universe of sources is a Poisson process
+which is then probabilistically censored or detected within that universe.
+There are arguments on both sides of this, but we prefer the form
+presented in \equationname~(\ref{eq:lf}).
+Further discussion of this point is out of scope in this \documentname.
+The comments we make (below) about the requirements on survey design
+and target selection are invariant to this subtle question about the
+form of the likelihood function.
 
 \section{The easy cases}\label{sec:easy}
 
 As we say in \sectionname~\ref{sec:intro}, the discussion in this
 \documentname\ applies to a wide range of surveys and projects.
+
+HOGG SYNTACTICAL
 
 However, our motivating examples include spectroscopic surveys, where
 often the targets are very bright relative to the magnitude limits of
@@ -567,7 +590,7 @@ bar
 \begin{thebibliography}{}
 \bibitem[Bovy \etal(2012)]{bovy} Bovy, J., Rix, H.-W., Liu, C., \etal, 2012, \apj, 753, 148
 \bibitem[Colless \etal(2001)]{2df} Colless, M., Dalton, G., Maddox, S., \etal, 2001, \mnras, 328, 1039
-\bibitem[Foreman-Mackey (2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
+\bibitem[Foreman-Mackey(2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
 \bibitem[Foreman-Mackey \etal(2014)]{exopop} Foreman-Mackey, D., Hogg, D.~W., \& Morton, T.~D., 2014, \apj, 795, 64
 \bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal, 2017, arXiv e-prints, arXiv:1711.03234
 \bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
