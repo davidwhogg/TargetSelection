@@ -284,15 +284,61 @@ We will return to this point in \sectionname~\ref{sec:estimate},
 where we discuss the determination or estimation of the selection
 function.
 
-HOGG SYNTACTICAL REFERENCE
+There are various important properties that this selection function
+does or must or could have.
+One is that the arguments $y_n, z_n$ of the function must be things
+that you can predict or compute in your model of the world.
+That is, in what follows, we will be using this selection function to
+perform some kind of statistical analysis of the population of
+sources, which involves some kind of model with parameters of what the
+population contains.
+This model has to be able to predict the density of sources in the
+$y_n, z_n$ space if this form of the selection function is to be
+useful.
+Of coure sometimes the selection of sources really does depend on
+things you can't easily predict or model!
+But the important thing is that any useful approximation to the
+selection function---useful for making population inferences---has to
+be written in terms of things that you can indeed predict or model in
+your population model.
+And (as we will discuss below) it is important to make choices with
+respect to source selection that make it close to true that the
+selection was indeed dependent on things you can model.
+This will come back up below.
 
-HOGG talk about factorization into \foreign{a priori} and \foreign{a posteriori} parts.
+Another important property that the selection function has is that it
+factorizes into two factors.
+One factor is what you might call the \foreign{a priori} selection:
+It is what you chose deliberately to put in your catalog.
+The other factor is what you might call the \foreign{a posteriori}
+selection:
+This is what, of the things you chose, that you end up eventually
+putting in your catalog, for reasons out of your control.
+For example, you might choose to take spectra of all galaxies in some
+simple color--magnitude box.
+But for some of the galaxies you aren't able, even with good spectra,
+to determine redshifts.
+Your redshift catalog contains, then, only those galaxies that
+\emph{both} were chosen by you \foreign{a priori} and which,
+\foreign{a posteriori}, after spectroscopy, were assigned redshifts.
+The total selection function is a product of these two selections.
+By definition, the \foreign{a posteriori} selection function is out of
+your control.
+But it is important to do everything you can to make the \foreign{a
+  priori} selection function computationally tractable and accurate,
+and the \foreign{a posteriori} selection function as pleasant or
+minimally disruptive as possible.
+In this \documentname we will focus on the \foreign{a priori}
+selection function, because it is the part under our control.
+But the \foreign{a posteriori} selection function is also just as
+important, especially when the success rate on targets becomes
+substantially less than unity.
+
+HOGG SYNTACTICAL REFERENCE
 
 HOGG talk about independence here.
 
 HOGG talk about trying to make this all about observables; it will help.
-
-HOGG mention that it will need to be a function of things you \emph{can} model!
 
 HOGG is there some point to talking about possible confounders or incomplete information here?
 
