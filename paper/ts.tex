@@ -333,18 +333,56 @@ selection function, because it is the part under our control.
 But the \foreign{a posteriori} selection function is also just as
 important, especially when the success rate on targets becomes
 substantially less than unity.
+In \sectionname~\ref{sec:estimate} we will discuss how to estimate
+both of these functions, or their product, no matter how the data
+were selected \foreign{a priori}.
 
-HOGG SYNTACTICAL REFERENCE
+One assumption we have made here, which we will make again two
+more times in \sectionname~\ref{sec:lf}, is an assumption of
+independence:
+We have assumed that the selection of source $n$ depends only on
+the properties $y_n, z_n$ of source $n$.
+This is an assumption at this point, but it will become a contraint
+when we consider survey design HOGG WHERE BELOW.
+This constraint is easy to accidentally violate when designing a
+survey; many surveys do not have this property (because, for example,
+the sample is thinned in high-density regions, or only the brightest
+sources are taken in some fields).
+We will say more about this in \sectionname~HOGG WHERE.
 
-HOGG talk about independence here.
+One thing that makes life easier, as we discuss in \sectionname~\ref{sec:easy},
+is to try to make the selection function depend only on the observed
+properties $y_n$ and not at all on the latent properties $z_n$.
+This makes some of the inference of populations easier.
+However, this is only helpful, not a requirement.
+The key \emph{requirement} is that the selection function be based
+on properties of the source that your model is capable of predicting
+or modeling.
 
-HOGG talk about trying to make this all about observables; it will help.
+Of course the selection of sources, and especially any \foreign{a
+  posteriori} selections, can be based on things outside your control.
+Therefore it is likely that the selection function $S(y_n, z_n)$ will
+not be a completely deterministic function of its arguments $y_n, z_n$.
+The probability of selection that $S(\cdot)$ represents is a
+probability marginalizing out the unobserved properties of the source
+that are affecting its inclusion in the catalog.
+It is the existence of such unmodeled effects that makes $S(y_n, z_n)$
+a finite probability rather than a deterministic zero or unity.
 
-HOGG is there some point to talking about possible confounders or incomplete information here?
-
-Here might be the place to note that the selection function has to something of
-which we can ask \emph{counterfactual} questions. It can't just be defined at
-the locations of the data.
+Finally, one important comment: When we perform population inferences,
+we are going to multiply our model by this function $S(y_n, z_n)$ (as
+we do explicitly in \sectionname~\ref{sec:lf}).
+This requires that the selection function be defined for all
+conceivable values of the observed data $y_n$ and all conceivable
+values of the latents $z_n$.
+That is, the selection function will be used to ask
+\emph{counterfactual questions} about what would have been observed if
+the world had been different.
+It is not sufficient to compute the selection function just at the
+locations of the observed objects.
+If it is only computed at those locations, and used naively (to, say,
+upweight the data distribution), the resulting inferences will be 
+biased (\citealt{blogpost}).
 
 \section{The likelihood function}\label{sec:lf}
 
@@ -467,17 +505,8 @@ As with the noise model, the selection function can also depend on
 unknown parameters, which can also be fit or inferred or marginalized
 simultaneously with the population-level parameters $\theta$.
 We will return to this point HOGG WHERE?
-
-There is one more assumption to emphasize here: The fact that the
-selection function for source $n$ depends only on the properties of
-source $n$ is a third assumption of independence.
-It is an assumption at this point, but it will become a contraint
-when we consider survey design HOGG WHERE BELOW?
-This constraint is easy to accidentally violate when designing a
-survey; many surveys do not have this property (because, for example,
-the sample is thinned in high-density regions, or only the brightest
-sources are taken in some fields).
-We will say more about this in \sectionname~HOGG WHERE.
+Once again, in this third factor we have made a third assumption of
+independence, which we discussed in \sectionname~\ref{sec:sf}.
 
 Just to be exceedingly clear about dimensions, in this \documentname,
 a pdf has the properties
