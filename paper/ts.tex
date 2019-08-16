@@ -348,13 +348,14 @@ the locations of the data.
 
 \section{The likelihood function}\label{sec:lf}
 
-The reader who is interested in how to design a survey to obtain a
-good selection function can skip this \sectionname, and
-\sectionname~\ref{sec:easy}.
-These \sectionname s are here to provide the information-theory
-justification for having a simple independent selection function.
-This is fundamental, but not required reading.
-
+In this \sectionname, we show where the selection function appears in
+a probabilistic model, or likelihood function, for the source
+population.\footnote{The reader who is mainly interested in how to
+  design a survey to obtain a good selection function, and not as
+  interested in the fundamentals, can skip this \sectionname, and
+  \sectionname~\ref{sec:easy}.  These \sectionname s are here to
+  provide the information-theory justification for having a simple
+  independent selection function.  This is not required reading.}
 As we posited above, we are designing a catalog or a targeted
 spectroscopic project
 with population-level statistical goals, for example HOGG XXX or YYY.
@@ -533,10 +534,33 @@ the likelihood function.
 
 \section{The easy cases}\label{sec:easy}
 
-As we say in \sectionname~\ref{sec:intro}, the discussion in this
-\documentname\ applies to a wide range of surveys and projects.
+Continuing with the form of the likelihood function,\footnote{This
+  \sectionname, like \sectionname~\ref{sec:lf} can be skipped by a
+  reader who is mostly reading for advice.} here we point out
+situations in which it becomes simpler than the expression presented
+in equation~(\ref{eq:lf}).
+The first observation to make is that the integrals inside the sum are
+over the true properties $z_n$, not the observed properties $y_n$.
+This means that if the selection function $S(\cdot)$ depends only on
+the observed properties $y_n$ and not on any unobserved latent parameters,
+the selection function $S(y_n)$ can be put in front of that integral.
+And since the logarithm is being taken, and $S(y_n)$ (by assumption)
+doesn't depend on the population-level parameters, it can be removed
+entirely from the expression as an irrelevant constant term (this is
+noted previously in \citealt{bovy}).
+In this case, the selection function appears in the integral
+$Q(\theta)$ but not at all in the sum of logarithms of marginals.
 
-HOGG SYNTACTICAL
+In many cases, it is not an investigator choice whether the selection
+function is delivered in terms of $y_n$ or $z_n$ or both, but when it
+is a choice, it is useful to choose to deliver it in terms of the
+observed quantities $y_n$.
+We will return to this point in \sectionname~\ref{sec:estimate}, where
+we discuss how the selection function is estimated or determined.
+
+The other observation to make is that sometimes the source selection is
+being performed in \emph{extremely good data}.
+For example, ... HOGG SYNTACTICAL
 
 However, our motivating examples include spectroscopic surveys, where
 often the targets are very bright relative to the magnitude limits of
