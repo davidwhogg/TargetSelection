@@ -576,7 +576,7 @@ selection function, and about requirements on survey design and target
 selection, are all invariant to this subtle statistical question about
 the form of the likelihood function.
 
-\section{The easy cases}\label{sec:easy}
+\section{More likelihood function: The easy cases}\label{sec:easy}
 
 Continuing with the form of the likelihood function,\footnote{This
   \sectionname, like \sectionname~\ref{sec:lf} can be skipped by a
@@ -605,24 +605,50 @@ observed quantities $y_n$.
 We will return to this point in \sectionname~\ref{sec:estimate}, where
 we discuss how the selection function is estimated or determined.
 
-The other observation to make is that sometimes the source selection is
-being performed in \emph{extremely good data}.
+The other---and perhaps more general---observation to make is that
+sometimes the source selection is being performed in \emph{extremely
+  good data}.
+For example, when targets are being chosen for spectroscopy, in
+imaging that is much deeper than the magnitude limits for the
+spectroscopy.
+This relates to our motivating examples of \project{SDSS} and
+\project{SDSS-V}, where the spectrographs are being used on sources 5
+to 10 magnitudes brighter than the limits of the imaging.
+In this case, it can become (effectively) the case that there is no
+distinction to be made between the data $y_n$ on source $n$ and the
+true, latent properties $z_n$ of source $n$.
+That is, at the precision of interest, it can become the case that
+$y_n\equiv z_n$, or the observed data are effectively the source's
+true properties.
+In this case there is no marginalization over the noise model
+$p(y_n\given z_n)$ required, and the likelihood function becomes
+\begin{gather}
+\ln p(\set{y_n}_{n=1}^{N}\given\theta)
+ = \sum_{n=1}^N \ln\lambda_0(y_n\given \theta) - Q(\theta) + \mbox{const}
+\label{eq:good}
+\\
+Q(\theta) = \int\lambda_0(y_n\given \theta)\,S(y_n)\,\dd y_n
+\quad ,
+\end{gather}
+where the $S(y_n)$ has disappeared from the sum because it is an
+irrelevant constant (independent of the important parameters
+$\theta$).
+That irrelevant constant can't be ignored if the selection function
+itself has free parameters that you want to fit or infer or
+marginalize simultaneously with your populations inference.
 
-For example, when targets are being chosen for spectroscopy, 
-
-For example, ... HOGG SYNTACTICAL
-
-However, our motivating examples include spectroscopic surveys, where
-often the targets are very bright relative to the magnitude limits of
-the imaging data in which the targets are being selected.
-
-It turns out that in the extremely-good-data case, the likelihood
-function of \sectionname~\ref{sec:lf} simplifies dramatically and
-inference becomes substantially easier.
-
-But the requirements on ``extremely good'' are severe.
-
-Now imagine the 
+Of course, in this ``good-data'' limit, there is still an
+\foreign{a posteriori} selection function acting---sources can be
+observed but not successfully analyzed and included in the
+catalog---but again in these projects, often the spectroscopy is taken
+at such high signal-to-noise that \foreign{a posteriori}
+incompleteness is not a significant issue.
+If we add that criterion to the criteria for being in the good-data
+limit, the simpler form of the likelihood function in
+\equationname~(\ref{eq:good}) can be justified.
+That is, the good-data limit can be achieved, and has been for many
+high signal-to-noise surveys (HOGG CITE THINGS?), but the criteria
+are definitely severe.
 
 \section{Correct the data or correct the model?}\label{sec:correct}
 
