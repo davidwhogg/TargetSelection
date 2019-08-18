@@ -121,6 +121,7 @@ used for inference, but at information-theoretic cost.
  telescopes
 }
 
+\section*{}\clearpage
 \section{Why source selection matters}\label{sec:intro}
 
 Many projects in conteporary astrophysics proceed by obtaining
@@ -203,21 +204,28 @@ and the legacy value for the community.
 
 In what follows, we make some assumptions about what's important,
 scientifically, about the project of interest, and what is not.
-We will assume that the project wants to understand statistical properties
-of the objects under study.
+Full disclosure: We are motivated by our role in helping to design the
+\project{SDSS-V} Project, which will take millions of spectra of
+active galaxies in the Universe and stars in the Milky Way
+(\citealt{sdssv}).
+We will assume that, like in \project{SDSS-V}, the investigators
+making or using the catalog or project of interest want to understand
+statistical properties of the objects under study.
 For example, the mean density of galaxies, or the fraction of galaxies
 of different types in different environments;
 or the relative rates of different types of supernovae;
 or the density of stars as a function of chemical abundances and radius in the Milky Way disk;
 or the rate at which stars host planets in a certain mass and period range.
-But we will also assume that the project cares about these goals more,
+
+We will assume something a bit stronger than this, even:
+We will assume that the project cares about these goals more,
 or equally with, discovery rate or sample purity.
 That is, the rules that we elucidate will put (at least slightly)
 legacy statistical value in competition with discovery rate or sample
 purity.
-This is because we will put restrictions on what can be used for
-selection, and those restrictions will come at the cost of some
-opportunities to improve purity.
+This is because the statistical considerations will put restrictions
+on what can be used for selection, and those restrictions will come at
+the cost of some opportunities to improve purity.
 We will also assume (in this \documentname) that the survey is performing
 its sample selection in a single pass, not adaptively, using some
 targetted observations, using these to refine the target sample, and
@@ -233,15 +241,18 @@ spectra) or higher-order spatial statistics.
 The measurement of these spatial statistics bring additional issues
 that are also out of scope here.
 
+\section{Scientific goals: Two examples}
+
 \textbf{HWR: Should we explain some example scientific goals here, and make
 them ``fiducials'' for what follows?}
 
 \section{The selection function}\label{sec:sf}
 
-Our goal is to select our sources such that it is possible to
-construct a computationally tractable and relatively accurate model of
-the selection function $S$, or the probability that a source would have
-been selected for the catalog, as a function of that source's properties.
+We'd like to select our sources and operate our survey or project such
+that it is possible to construct a computationally tractable and
+relatively accurate model of the selection function $S$, or the
+probability that a source would have been selected for the catalog, as
+a function of that source's properties.
 The reason that this is our goal---the reason that we want a selection
 function---is that we need it to perform population-level inferences.
 More technically, we need it to construct a likelihood function, as we
@@ -541,8 +552,9 @@ Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)
 This likelihood function is \emph{marginalized} in the sense that we
 have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
 
-This (\ref{eq:lf}) is the likelihood function used in our exoplanet
-populations work (\citealt{exopop}; HOGG OTHER CITATIONS?).
+This (\ref{eq:lf}) is the likelihood function used in our Milky Way
+and exoplanet populations work (\citealt{bovy, exopop}; HOGG OTHER
+CITATIONS?).
 It is not, however, the likelihood function used in some other but
 similar contexts (\citealt{loredogrb, loredo}).
 The difference is that in the latter projects, the selection function
@@ -581,7 +593,10 @@ doesn't depend on the population-level parameters, it can be removed
 entirely from the expression as an irrelevant constant term (this is
 noted previously in \citealt{bovy}).
 In this case, the selection function appears in the integral
-$Q(\theta)$ but not at all in the sum of logarithms of marginals.
+$Q(\theta)$ but not at all in the sum of logarithms, which
+(interestingly) makes it effectively identical to the likelihood
+constructed under the alternate assumptions mentioned above
+(\citealt{loredo}).
 
 In many cases, it is not an investigator choice whether the selection
 function is delivered in terms of $y_n$ or $z_n$ or both, but when it
@@ -592,6 +607,9 @@ we discuss how the selection function is estimated or determined.
 
 The other observation to make is that sometimes the source selection is
 being performed in \emph{extremely good data}.
+
+For example, when targets are being chosen for spectroscopy, 
+
 For example, ... HOGG SYNTACTICAL
 
 However, our motivating examples include spectroscopic surveys, where
