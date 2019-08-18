@@ -284,6 +284,8 @@ We will return to this point in \sectionname~\ref{sec:estimate},
 where we discuss the determination or estimation of the selection
 function.
 
+\section{Basic desiderata for the selection function}\label{sec:desiderata}
+
 There are various important properties that this selection function
 does or must or could have.
 One is that the arguments $y_n, z_n$ of the function must be things
@@ -506,7 +508,7 @@ unknown parameters, which can also be fit or inferred or marginalized
 simultaneously with the population-level parameters $\theta$.
 We will return to this point HOGG WHERE?
 Once again, in this third factor we have made a third assumption of
-independence, which we discussed in \sectionname~\ref{sec:sf}.
+independence, which we discussed in \sectionname~\ref{sec:desiderata}.
 
 Just to be exceedingly clear about dimensions, in this \documentname,
 a pdf has the properties
@@ -525,8 +527,8 @@ and a selection function has the property
 0\leq S(a, b)\leq 1 \quad \mbox{for all $a, b$.}
 \end{equation}
 
-These three factors combine into the complete, marginalized likelihood
-function $p(\set{y_n}\given\theta)$ as follows:
+The three likelihood factors combine into the complete, marginalized
+likelihood function $p(\set{y_n}\given\theta)$ as follows:
 \begin{gather}
 \ln p(\set{y_n}_{n=1}^{N}\given\theta)
  = \sum_{n=1}^N \ln\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n - Q(\theta)
@@ -539,7 +541,7 @@ This likelihood function is marginalized because we have integrated out
 the true latent properties $\set{z_n}_{n=1}^N$.
 
 This is the likelihood function used in our exoplanet populations
-work (\citealt{exopop}) HOGG OTHER CITATIONS?.
+work (\citealt{exopop}; HOGG OTHER CITATIONS?).
 It is not, however, the likelihood function used in some other but
 similar contexts (\citealt{loredogrb, loredo}).
 The difference is that in the latter projects, the selection function
@@ -558,8 +560,8 @@ presented in \equationname~(\ref{eq:lf}).
 Further discussion of this point is out of scope in this \documentname.
 The comments we make (both above and below) about the form of the
 selection function, and about requirements on survey design and target
-selection, are all invariant to this subtle question about the form of
-the likelihood function.
+selection, are all invariant to this subtle statistical question about
+the form of the likelihood function.
 
 \section{The easy cases}\label{sec:easy}
 
