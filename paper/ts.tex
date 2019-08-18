@@ -243,8 +243,8 @@ that are also out of scope here.
 
 \section{Scientific goals: Two examples}
 
-\textbf{HWR: Should we explain some example scientific goals here, and make
-them ``fiducials'' for what follows?}
+HWR: Should we explain some example scientific goals here, and make
+them ``fiducials'' for what follows?
 
 \section{The selection function}\label{sec:sf}
 
@@ -630,9 +630,9 @@ $p(y_n\given z_n)$ required, and the likelihood function becomes
 Q(\theta) = \int\lambda_0(y_n\given \theta)\,S(y_n)\,\dd y_n
 \quad ,
 \end{gather}
-where the $S(y_n)$ has disappeared from the sum because it is an
-irrelevant constant (independent of the important parameters
-$\theta$).
+where the $S(y_n)$ has disappeared from the sum because it (or really
+the log of it) is an irrelevant constant (independent of the important
+parameters $\theta$).
 That irrelevant constant can't be ignored if the selection function
 itself has free parameters that you want to fit or infer or
 marginalize simultaneously with your populations inference.
@@ -652,20 +652,50 @@ are definitely severe.
 
 \section{Correct the data or correct the model?}\label{sec:correct}
 
+The sample of data you get is like a measurement of the universe, but
+the universe multiplied by the selection function.
+In the easy cases (\sectionname~\ref{sec:easy}), the selection function
+$S(y_n)$ is a function only of the observed data $y_n$.
+Therefore it becomes tempting to divide the data by the selection
+function---or really re-weight the data by the inverse of the slection
+function---to get a weighted data set that looks much more like the
+universe than the unweighted data set.
+That's a sensible idea, and the basis of a lot of astrophysics, going
+all the way back to the V-max method (HOGG CITE) and continuing in a
+literature on the luminosity functions of stars and galaxies and
+related one-point statistics (HOGG CITES).
+However, it is not a good use of the data:
+The approach of re-weighting the data by the inverse of the
+selection function is both high-variance and biased.
+
 HOGG SYNTACTICAL
 
-This section should include the point that the tradition is to divide out
-the selection function. That's not good, for divide-by-zero or variance
-reasons. There are words in a DFM paper relevant to this.
+HOGG To see why this inverse-selection weighting is high-variance...
 
-The divide-by-selection-function methods have the great property that you don't need
-to know the SF everywhere. You only need to know it at your data. But then
-it can't penalize models that put high weight on locations with near-zero
-completeness. That is, it is biased in these regions and wrong.
+HOGG To see why this inverse-selection weighting is biased... Be sure to cite \citet{blogpost}.
 
-Be sure to cite \citet{blogpost}.
+Thus the best way to perform population-level inferences is not to
+re-weight the data by the inverse of the selection function.  It is to
+weight the universe model by the selection function, and make
+quantitative comparisons between the weighted universe and the
+unweighted data.
+The strictly correct thing to do (or at least one method that will
+produce information-theory-saturating inferences) is to fit the data
+using one of the likelihood functions outlined in \sectionname
+s~\ref{sec:lf} and \ref{sec:easy}.
+However, it should be noted that when you weight the data by the
+inverse of the selection function, you only need to know the value of
+the selection function \emph{at each actual datum}.
+This means that you don't need to know it everywhere.
+And sometimes, for reasons outside your control, you \emph{do} only
+know the selection function at the locations of the data.
+It's not an argument \emph{for} weighting by inverse selection, but it
+is some kind of pragmatic justification for this method of last
+resort.
 
 \section{Contamination and backgrounds}\label{sec:bg}
+
+HWR: DO WE KEEP THIS HERE?
 
 \section{How do you measure or test the selection function?}\label{sec:estimate}
 
