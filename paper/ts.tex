@@ -730,14 +730,31 @@ It's not an argument \emph{for} weighting by inverse selection, but it
 is some kind of pragmatic justification for this method of last
 resort.
 
-\section{How do you measure or test the selection function?}\label{sec:estimate}
+\section{Survey design for a good selection function}
 
 HOGG SYNTACTICAL
 
-\section{Contamination and backgrounds}\label{sec:bg}
+Here we ask how to make good choices...
 
-HWR: DO WE HAVE A SECTION ON CONTAMINATION? I feel like we need to,
-but if we do, it brings in many new concepts and issues.
+\paragraph{Maintain high completeness:}
+
+\paragraph{Don't permit humans into the loop:}
+(And note that use of catalogs like Messier or Abell bring in humans
+by reference!)
+
+\paragraph{Select objects independently:}
+
+\paragraph{Keep it as simple as possible:}
+
+\paragraph{Keep to quantities you can model or predict:}
+
+\paragraph{Avoid making cuts on signal-to-noise:}
+
+\paragraph{Anticipate spatial conflicts:}
+
+\section{How do you measure or test the selection function?}\label{sec:estimate}
+
+HOGG SYNTACTICAL
 
 \section{How well do you need to know the selection function?}\label{sec:quality}
 
@@ -750,12 +767,18 @@ Let's make that explicit here, cite Bovy.
 When we say you don't have to know everything about the SF, that could be
 in space, in time, in Fourier Space, in magnitude, and so on.
 
-\section{Spatial selection functions}
+\section{Contamination and backgrounds}\label{sec:bg}
 
-Select on clustering? What's wrong with that?
+HWR: DO WE HAVE A SECTION ON CONTAMINATION? I feel like we need to,
+but if we do, it brings in many new concepts and issues.
 
-\section{Doing multiple surveys at once}
+\section{Spatial selections}
 
+Select on clustering? What's wrong with that? Fiber collisions. Crowding.
+
+\section{Open issues}
+
+\paragraph{Performing multiple surveys at once}
 Note that if you are doing both MWM and BHM at the same time, there will be
 spatial conflicts.
 
@@ -770,8 +793,7 @@ Idea of pre-down-sampling by a fixed, chosen function before starting, to avoid
 all spatial conflicts. This has interesting properties. It is a good idea; it isn't
 \emph{perfectly} safe (why?), but it is pretty good.
 
-\section{Adaptive strategies}
-
+\paragraph{Adaptive strategies}
 What changes for, or how do we think about, strategies in which you want to
 adaptively deepen certain interesting targets, but cut off uninteresting targets,
 while you are operating.
@@ -783,6 +805,9 @@ accurately enough to do our science so we drop the category). Or we change the e
 times we use \emph{during} the survey, based on what we see.
 
 Are these both interesting to our study?
+
+\paragraph{Select on apparent or intrinsic properties?}
+A great example is dust extinction and reddening.
 
 \section{Discussion}
 
