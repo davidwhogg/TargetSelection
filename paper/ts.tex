@@ -666,13 +666,50 @@ literature on the luminosity functions of stars and galaxies and
 related one-point statistics (HOGG CITES).
 However, it is not a good use of the data:
 The approach of re-weighting the data by the inverse of the
-selection function is both high-variance and biased.
+selection function tends to be both high-variance and biased.
 
-HOGG SYNTACTICAL
+To see why this inverse-selection weighting is high-variance, think about
+the sources that were detected in the low-selection-probability parts of
+the survey.
+THese sources will be given very large weights.
+That is, a lot of the effective mass in the data can become dominated by
+a small number of sources.
+And, worse than that, these sources will tend to be near the edge of
+what's detectable or at the edges of the effective parameter space, so
+they are likely to be less reliable in general.
+The disparity in the weights leads to a reduction in the effective size
+of your source catalog.
+If you have weighted your data with weights $w_n$ (which are inverse
+probabilities in this case), and different catalog entries get
+different weights, the effective size $N_\mathrm{eff}$ of your catalog
+is no longer $N$.
+It is given by
+\begin{equation}
+N_\mathrm{eff} = \frac{\left[\sum_{n=1}^N w_n\right]^2}{\sum_{n=1}^N w_n^2} < N \quad .
+\end{equation}
+This effective number gets smaller as the disparity in the weights increases.
 
-HOGG To see why this inverse-selection weighting is high-variance...
-
-HOGG To see why this inverse-selection weighting is biased... Be sure to cite \citet{blogpost}.
+To see why this inverse-selection weighting is usually biased,
+consider the case in which the goal is to visualize the population as
+a weighted number of objects (or sum of weights) in bins in the $y$
+space.
+If the inverse selection probabilities have been correctly estimated
+and applied, you might think that this will be a (possibly noisy)
+unbiased estimator of the true population.
+After all, you have corrected for selection!
+However, consider a histogram bin in which the selection probability
+varies substantially \emph{within} the bin.
+This will often happen at the edges of the selected region in the $y$
+space.
+In this bin, the sources you see are not fairly distributed in the
+bin: You tend to find your sources in that bin at the edge of the bin
+that has higher completeness.
+Thus the mean of the inverse selection probability over selected
+sources is not equal to the mean of the inverse selection probability
+over the whole bin.
+And indeed, neither of these means is precisely what one wants to
+compare to the un-censored universe model (this point is made clearly
+by \citealt{blogpost}).
 
 Thus the best way to perform population-level inferences is not to
 re-weight the data by the inverse of the selection function.  It is to
@@ -698,6 +735,8 @@ resort.
 HWR: DO WE KEEP THIS HERE?
 
 \section{How do you measure or test the selection function?}\label{sec:estimate}
+
+HOGG SYNTACTICAL
 
 \section{How well do you need to know the selection function?}\label{sec:quality}
 
