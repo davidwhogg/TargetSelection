@@ -511,18 +511,19 @@ Once again, in this third factor we have made a third assumption of
 independence, which we discussed in \sectionname~\ref{sec:desiderata}.
 
 Just to be exceedingly clear about dimensions, in this \documentname,
-a pdf has the properties
+a probability density function (pdf) $p(\cdot)$ has the properties
 \begin{gather}
 0 \leq   p(a\given b)        \quad \mbox{for all $a, b$,} \\
 1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$,}
 \end{gather}
-a density function has the properties
+a rate density or density function $\lambda(\cdot)$ has the properties
 \begin{gather}
-             0 \leq   \lambda(a\given b)        \quad \mbox{for all $a, b$,} \\
-\left<N\right> = \int \lambda(a\given b)\,\dd a \quad \mbox{for all $b$,}
+                0 \leq   \lambda(a\given b)        \quad \mbox{for all $a, b$,} \\
+\left<N(b)\right> = \int \lambda(a\given b)\,\dd a
 \end{gather}
-where $\left<N\right>$ is an expected number,
-and a selection function has the property
+where $\left<N(b)\right>$ is an expected number
+(which will depend, in general, on $b$),
+and a selection function $S(\cdot)$ has the property
 \begin{equation}
 0\leq S(a, b)\leq 1 \quad \mbox{for all $a, b$.}
 \end{equation}
@@ -537,11 +538,11 @@ likelihood function $p(\set{y_n}\given\theta)$ as follows:
 Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n\,\dd y_n
 \quad .
 \end{gather}
-This likelihood function is marginalized because we have integrated out
-the true latent properties $\set{z_n}_{n=1}^N$.
+This likelihood function is \emph{marginalized} in the sense that we
+have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
 
-This is the likelihood function used in our exoplanet populations
-work (\citealt{exopop}; HOGG OTHER CITATIONS?).
+This (\ref{eq:lf}) is the likelihood function used in our exoplanet
+populations work (\citealt{exopop}; HOGG OTHER CITATIONS?).
 It is not, however, the likelihood function used in some other but
 similar contexts (\citealt{loredogrb, loredo}).
 The difference is that in the latter projects, the selection function
