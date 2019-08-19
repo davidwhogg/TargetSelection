@@ -419,20 +419,29 @@ biased (\citealt{blogpost}).
 
 \section{Correct the data or correct the model?}\label{sec:correct}
 
-The sample of data you get is like a measurement of the universe, but
-the universe multiplied by the selection function.
+In the \appendixnames\ we discuss how to use the selection function
+to perform an inference about the population through a likelihood
+function.
+Part of that story is that the sample of data you get is like a
+measurement of the universe, but where the universe was first
+multiplied by the selection function.
+So can't you see the universe by just dividing the data by the
+selection function?
+Or do you really have to multiply the model of the universe by the
+selection function to build a good model for your data?
+
 In the easy cases for probabilistic inference (see \appendixname~\ref{app:easy}),
 the selection function
 $S(y_n)$ is a function only of the observed data $y_n$.
-Therefore it becomes tempting to divide the data by the selection
+In this case it becomes tempting to divide the data by the selection
 function---or really re-weight the data by the inverse of the slection
 function---to get a weighted data set that looks much more like the
 universe than the unweighted data set.
 That's a sensible idea, and the basis of a lot of astrophysics, going
-all the way back to the V-max method (HOGG CITE) and continuing in a
-literature on the luminosity functions of stars and galaxies and
-related one-point statistics (HOGG CITES).
-However, it is not a good use of the data:
+all the way back to the V-max method for the determination of the quasar
+luminosity function (\citealt{schmidt}) and continuing in a long literature on the
+luminosity functions of galaxies (for example, \citealt{cowie, blanton, faber}).
+However, it is not the best use of the data:
 The approach of re-weighting the data by the inverse of the
 selection function tends to be both high-variance and biased.
 
@@ -613,14 +622,18 @@ bar
 
 \begin{thebibliography}{}
 \bibitem[Bernstein \etal(2004)]{bernstein} Bernstein, G.~M., Trilling, D.~E., Allen, R.~L., \etal, 2004, \aj, 128, 1364
+\bibitem[Blanton \etal(2001)]{blanton} Blanton, M.~R., Dalcanton, J., Eisenstein, D., \etal, 2001, \aj, 121, 2358
 \bibitem[Bovy \etal(2012)]{bovy} Bovy, J., Rix, H.-W., Liu, C., \etal, 2012, \apj, 753, 148
 \bibitem[Colless \etal(2001)]{2df} Colless, M., Dalton, G., Maddox, S., \etal, 2001, \mnras, 328, 1039
+\bibitem[Cowie \etal(1996)]{cowie} Cowie, L.~L., Songaila, A., Hu, E.~M., \etal, 1996, \aj, 112, 839
+\bibitem[Faber \etal(2007)]{faber} Faber, S.~M., Willmer, C.~N.~A., Wolf, C., \etal, 2007, \apj, 665, 265
 \bibitem[Foreman-Mackey(2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
 \bibitem[Foreman-Mackey \etal(2014)]{exopop} Foreman-Mackey, D., Hogg, D.~W., \& Morton, T.~D., 2014, \apj, 795, 64
 \bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal, 2017, arXiv e-prints, arXiv:1711.03234
 \bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
 \bibitem[Loredo(2004)]{loredo} Loredo, T.~J., 2004, American Institute of Physics Conference Series, 195
 \bibitem[Mandel \etal(2019)]{mfg} Mandel, I., Farr, W.~M., \& Gair, J.~R., 2019, \mnras, 486, 1086
+\bibitem[Schmidt(1968)]{schmidt} Schmidt, M.\ 1968, \apj, 151, 393
 \bibitem[York \etal(2000)]{sdss} York, D.~G., Adelman, J., Anderson, J.~E., \etal, 2000, \aj, 120, 1579
 \end{thebibliography}
 
