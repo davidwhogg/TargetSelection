@@ -632,19 +632,25 @@ this \documentname, and in these \appendixnames, a probability density
 function (pdf) $p(\cdot)$ has the properties
 \begin{gather}
 0 \leq   p(a\given b)        \quad \mbox{for all $a, b$,} \\
-1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$.}
+1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$,}
 \end{gather}
+where the integral is over the entire conceivable domain of $a$.
+
 A rate density or density function $\lambda(\cdot)$ has the properties
 \begin{gather}
                 0 \leq   \lambda(a\given b)        \quad \mbox{for all $a, b$,} \\
 \left<N(b)\right> = \int \lambda(a\given b)\,\dd a \quad,
 \end{gather}
 where $\left<N(b)\right>$ is an expected number
-(which will depend, in general, on $b$).
+(which will depend, in general, on $b$). Once again, the integral
+is over the entire conceivable domain of $a$.
+
 A selection function $S(\cdot)$ has the property
 \begin{equation}
 0\leq S(a, b)\leq 1 \quad \mbox{for all $a, b$.}
 \end{equation}
+The selection function becomes \emph{deterministic} when it is
+everywhere either zero or unity.
 
 \section{The catalog likelihood function}\label{app:lf}
 
