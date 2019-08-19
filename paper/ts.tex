@@ -38,13 +38,14 @@
 % text macros
 \newcommand{\documentname}{\textsl{Article}}
 \newcommand{\sectionname}{Section}
+\newcommand{\appendixnames}{Appendices}
 \newcommand{\equationname}{equation}
 \newcommand{\code}[1]{\texttt{\detokenize{#1}}}
 \newcommand{\acronym}[1]{{\small{#1}}}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\etal}{\foreign{et al.}}
-\renewcommand{\paragraph}[1]{\smallskip\noindent\textit{#1} --- }
+\renewcommand{\paragraph}[1]{\medskip\noindent\textit{#1} ---}
 
 % margins and headers and spacing changes
 \renewcommand{\twocolumngrid}{}  % trust in Hogg -- bibliography fix
@@ -257,7 +258,8 @@ a function of that source's properties.
 The reason that this is our goal---the reason that we want a selection
 function---is that we need it to perform population-level inferences.
 More technically, we need it to construct a likelihood function, as we
-will argue in \sectionname~\ref{sec:lf}, and we need that likelihood
+argue (outside the main text)
+in \appendixname~\ref{app:lf}, and we need that likelihood
 function in order to make information-theory-optimal inferences.
 
 But even if we don't want to be information-theory optimal: The
@@ -300,8 +302,11 @@ function.
 
 There are various important properties that this selection function
 does or must or could have.
-One is that the arguments $y_n, z_n$ of the function must be things
-that you can predict or compute in your model of the world.
+Here we list and discuss a few of them.
+
+\paragraph{Inputs can be modeled}
+The arguments $y_n, z_n$ of the function must be things
+that you can predict or compute in your model of the universe.
 That is, in what follows, we will be using this selection function to
 perform some kind of statistical analysis of the population of
 sources, which involves some kind of model with parameters of what the
@@ -318,10 +323,10 @@ your population model.
 And (as we will discuss below) it is important to make choices with
 respect to source selection that make it close to true that the
 selection was indeed dependent on things you can model.
-This will come back up below.
+This will come back up in \sectionname~\ref{sec:design}.
 
-Another important property that the selection function has is that it
-factorizes into two factors.
+\paragraph{Things outside your control}
+The selection function factorizes into two distinct factors.
 One factor is what you might call the \foreign{a priori} selection:
 It is what you chose deliberately to put in your catalog.
 The other factor is what you might call the \foreign{a posteriori}
@@ -336,6 +341,7 @@ Your redshift catalog contains, then, only those galaxies that
 \emph{both} were chosen by you \foreign{a priori} and which,
 \foreign{a posteriori}, after spectroscopy, were assigned redshifts.
 The total selection function is a product of these two selections.
+
 By definition, the \foreign{a posteriori} selection function is out of
 your control.
 But it is important to do everything you can to make the \foreign{a
@@ -351,20 +357,32 @@ In \sectionname~\ref{sec:estimate} we will discuss how to estimate
 both of these functions, or their product, no matter how the data
 were selected \foreign{a priori}.
 
-One assumption we have made here, which we will make again two
-more times in \sectionname~\ref{sec:lf}, is an assumption of
-independence:
-We have assumed that the selection of source $n$ depends only on
+\paragraph{Independence}
+One assumption we will make here, which is made again two more times
+in the likelihood-function justification in
+\appendixname~\ref{app:lf}, is an assumption of independence:
+We assume that the selection of source $n$ depends only on
 the properties $y_n, z_n$ of source $n$.
-This is an assumption at this point, but it will become a contraint
-when we consider survey design HOGG WHERE BELOW.
-This constraint is easy to accidentally violate when designing a
-survey; many surveys do not have this property (because, for example,
-the sample is thinned in high-density regions, or only the brightest
-sources are taken in some fields).
-We will say more about this in \sectionname~HOGG WHERE.
+It turns out that, for pragmatic computational and modeling reasons,
+it is very difficult to perform good data analyses if the selection of
+one source depends on the properties of other sources.
+For one, it destroys the separability of the likelihood function
+that we develop in \appendixname~\ref{app:lf}.
+For another, it means that your model must be capable of predicting
+not just the properties of the sources, but the properties of the
+$K$-tuples that are jointly involved in selection.
+Most astrophysical models can't do this.
 
-One thing that makes life easier, as we discuss in \sectionname~\ref{sec:easy},
+Independence is an assumption at this point, but it will become a contraint
+when we consider survey design.
+This constraint is easy to accidentally violate when
+designing a survey; many surveys do not have this property (because,
+for example, the sample is thinned in high-density regions, or only
+the brightest sources are taken in some fields).
+We will say more about this in \sectionname~\ref{sec:design}.
+
+\paragraph{Select on observables if possible}
+One thing that makes life easier, as we discuss in \appendixname~\ref{app:easy},
 is to try to make the selection function depend only on the observed
 properties $y_n$ and not at all on the latent properties $z_n$.
 This makes some of the inference of populations easier.
@@ -383,9 +401,10 @@ that are affecting its inclusion in the catalog.
 It is the existence of such unmodeled effects that makes $S(y_n, z_n)$
 a finite probability rather than a deterministic zero or unity.
 
+\paragraph{Counterfactual evaluation}
 Finally, one important comment: When we perform population inferences,
 we are going to multiply our model by this function $S(y_n, z_n)$ (as
-we do explicitly in \sectionname~\ref{sec:lf}).
+we do explicitly in \appendixname~\ref{app:lf}).
 This requires that the selection function be defined for all
 conceivable values of the observed data $y_n$ and all conceivable
 values of the latents $z_n$.
@@ -398,264 +417,12 @@ If it is only computed at those locations, and used naively (to, say,
 upweight the data distribution), the resulting inferences will be 
 biased (\citealt{blogpost}).
 
-\section{The likelihood function}\label{sec:lf}
-
-In this \sectionname, we show where the selection function appears in
-a probabilistic model, or likelihood function, for the source
-population.\footnote{The reader who is mainly interested in how to
-  design a survey to obtain a good selection function, and not as
-  interested in the fundamentals, can skip this \sectionname, and
-  \sectionname~\ref{sec:easy}.  These \sectionname s are here to
-  provide the information-theory justification for having a simple
-  independent selection function.  This is not required reading.}
-As we posited above, we are designing a catalog or a targeted
-spectroscopic project
-with population-level statistical goals, for example HOGG XXX or YYY.
-Here we will imagine that the model of the population (for example the model
-of XXX or YYY) has parameters $\theta$.
-These parameters $\theta$ describe the properties of the true distribution
-of astronomical objects (galaxies, stars, supernovae, planets, or whatever)
-that would be oberved if we could see everything of interest completely and
-with high fidelity.
-The object (by assumption) is to determine these population-level parameters
-$\theta$.
-
-No matter how the data analysis is going to proceed, it is nonetheless
-useful to think in
-terms of a \emph{likelihood function}, or probability for the data given
-the parameters $\theta$ of interest.
-The likelihood function is the critical tool for Bayesian inference, and
-it is also the critical tool for constructing frequentist estimators that
-saturate information-theoretic bounds.
-It also follows that if the investigator \emph{can} write a likelihood
-function, then the investigator does know enough about the data to perform
-any kind of information-saturating inference.
-Therefore, we maximize statistical legacy value for a statistical project
-when we make it possible for investigators to construct a justifiable and
-computationally tractable likelihood function.
-
-For our purposes here, the likelihood function factorizes into three
-factors:
-The first factor is the population model.
-We assume that the population-level parameters $\theta$ generate the
-sources of interst.
-That is, the parameters $\theta$ parameterize a probability density
-function (pdf) $p_0(\set{z_n}\given\theta)$
-for the set of true properties $\set{z_n}$ of all of the sources $n$
-in the Galaxy (we will posit for now that the objects of study are
-stars in the Milky Way; they could be galaxies in the Universe or
-planets in the solar neighborhood or anything else).
-This is the first of the three factors that make up the likelihood
-function.
-We subscript it with a $0$ to indicate that
-this is a model of the true world;
-it is the pdf you would observe if you saw everything perfectly.
-
-This population model $p_0(\set{z_n}\given\theta)$ could have any arbitrarily
-complicated form.
-However, for our purposes here, we are going to assume it has a certain kind
-of separability.
-That is, we are going to assume that the objects are conditionally independent,
-or independently drawn, conditioned on the parameters $\theta$.
-This is like saying that the model is a variable-rate Poisson process.
-Under this assumption, the model can be written as a product over sources (or sum in the log), like so:
-\begin{equation}
-\ln p_0(\set{z_n}\given\theta) = \sum_n \ln \lambda_0(z_n\given\theta) - Q(\theta)
-\end{equation}
-where $Q(\theta)$ is a normalization factor that we will discuss below
-(after we have introduced the selection function), and the
-individual-source models $\lambda_0(z_n\given\theta)$ represent the
-density functions (number of sources per unit volume in the $z$-space)
-for individual sources given the population parameters $\theta$.
-This assumption---that the population model can be written as a product over
-sources---is used frequently in astrophysics projects.
-In this approximation, there can be no information two-point or
-higher-order statistics of the data; or nothing can be learned from
-source pairs that can't be learned combining information from the
-individual members of those pairs.
-Among other things, this formalism or assumption is at odds with
-models that specify source--source correlation functions.
-
-The second factor in the likelihood function is
-a noise model $p(y_n\given z_n)$, which gives a probability density for
-observing observed properties $y_n$ for source $n$ under the assumption
-that it has true properties $z_n$.
-In the case that the true properties are things like true brightnesses
-and true colors for the stars, this noise model $p(y_n\given z_n)$ is
-very simple (it is just the noise properties of the data.
-This noise model is more complex if the true properties are things like
-stellar masses or ages, where the connection to the noisy observables is
-less direct.
-This noise model depends in detail on having a good model for how the
-observing instrumentation works, or in fact how the whole chain of causation
-works from the true properties $z_n$ to the observed values $y_n$.
-If this model contains uncertain parameters (unknown gains, say, or
-unknown read noise, or \foreign{etc.}), then this function
-$p(y_n\given z_n)$ could be conditioned on additional noise-model
-parameters and these could be fit or inferred or marginalized out
-simultaneously with the population-level parameters $\theta$. WE MAY
-RETURN TO THIS LATER.
-
-It is worth emphasizing an assumption here:
-By writing this noise model at the individual-source level as
-$p(y_n\given z_n)$
-and not at the whole-catalog level
-$p(\set{y_n}\given\set{z_n})$,
-we have assumed that the observed properties $y_n$ of source $n$
-depend only on the true properties $z_n$ \emph{of that source}.
-This is another kind of assumption of independence:
-Technically this independence can be broken in real surveys by,
-for example, calibration noise, which correlates the wrongness of
-every source in some patch.
-But we make this assumption because it is often very close to being
-correct, and it keeps the likelihood function (below) tractable.
-
-The third factor in the likelihood function is the selection function,
-described in the previous \sectionname.
-This is the function $S(y_n,z_n)$ that gives the probability that a
-source was included in the catalog, given its observed or true
-properties (or both).
-As with the noise model, the selection function can also depend on
-unknown parameters, which can also be fit or inferred or marginalized
-simultaneously with the population-level parameters $\theta$.
-We will return to this point HOGG WHERE?
-Once again, in this third factor we have made a third assumption of
-independence, which we discussed in \sectionname~\ref{sec:desiderata}.
-
-Just to be exceedingly clear about dimensions, in this \documentname,
-a probability density function (pdf) $p(\cdot)$ has the properties
-\begin{gather}
-0 \leq   p(a\given b)        \quad \mbox{for all $a, b$,} \\
-1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$,}
-\end{gather}
-a rate density or density function $\lambda(\cdot)$ has the properties
-\begin{gather}
-                0 \leq   \lambda(a\given b)        \quad \mbox{for all $a, b$,} \\
-\left<N(b)\right> = \int \lambda(a\given b)\,\dd a
-\end{gather}
-where $\left<N(b)\right>$ is an expected number
-(which will depend, in general, on $b$),
-and a selection function $S(\cdot)$ has the property
-\begin{equation}
-0\leq S(a, b)\leq 1 \quad \mbox{for all $a, b$.}
-\end{equation}
-
-The three likelihood factors combine into the complete, marginalized
-likelihood function $p(\set{y_n}\given\theta)$ as follows:
-\begin{gather}
-\ln p(\set{y_n}_{n=1}^{N}\given\theta)
- = \sum_{n=1}^N \ln\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n - Q(\theta)
-\label{eq:lf}
-\\
-Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n\,\dd y_n
-\quad .
-\end{gather}
-This likelihood function is \emph{marginalized} in the sense that we
-have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
-
-This (\ref{eq:lf}) is the likelihood function used in our Milky Way
-and exoplanet populations work (\citealt{bovy, exopop}; HOGG OTHER
-CITATIONS?).
-It is not, however, the likelihood function used in some other but
-similar contexts (\citealt{loredogrb, loredo}).
-The difference is that in the latter projects, the selection function
-does not appear in the sum; it only appears in the normalization $Q(\theta)$.
-This difference flows from some different assumptions about how the
-data are generated.
-We are (effectively) assuming that the universe plus the survey are jointly
-working together to generate a data stream.
-That jointly generated data stream is being treated as a variable-rate Poisson
-process.
-The work that removes the selection function $S(\cdot)$ from the sum
-makes the assumption that the universe of sources is a Poisson process
-which is then probabilistically censored or detected within that universe.
-There are arguments on both sides of this, but we prefer the form
-presented in \equationname~(\ref{eq:lf}).
-Further discussion of this point is out of scope in this \documentname.
-The comments we make (both above and below) about the form of the
-selection function, and about requirements on survey design and target
-selection, are all invariant to this subtle statistical question about
-the form of the likelihood function.
-
-\section{More likelihood function: The easy cases}\label{sec:easy}
-
-Continuing with the form of the likelihood function,\footnote{This
-  \sectionname, like \sectionname~\ref{sec:lf} can be skipped by a
-  reader who is mostly reading for advice.} here we point out
-situations in which it becomes simpler than the expression presented
-in equation~(\ref{eq:lf}).
-The first observation to make is that the integrals inside the sum are
-over the true properties $z_n$, not the observed properties $y_n$.
-This means that if the selection function $S(\cdot)$ depends only on
-the observed properties $y_n$ and not on any unobserved latent parameters,
-the selection function $S(y_n)$ can be put in front of that integral.
-And since the logarithm is being taken, and $S(y_n)$ (by assumption)
-doesn't depend on the population-level parameters, it can be removed
-entirely from the expression as an irrelevant constant term (this is
-noted previously in \citealt{bovy}).
-In this case, the selection function appears in the integral
-$Q(\theta)$ but not at all in the sum of logarithms, which
-(interestingly) makes it effectively identical to the likelihood
-constructed under the alternate assumptions mentioned above
-(\citealt{loredo}).
-
-In many cases, it is not an investigator choice whether the selection
-function is delivered in terms of $y_n$ or $z_n$ or both, but when it
-is a choice, it is useful to choose to deliver it in terms of the
-observed quantities $y_n$.
-We will return to this point in \sectionname~\ref{sec:estimate}, where
-we discuss how the selection function is estimated or determined.
-
-The other---and perhaps more general---observation to make is that
-sometimes the source selection is being performed in \emph{extremely
-  good data}.
-For example, when targets are being chosen for spectroscopy, in
-imaging that is much deeper than the magnitude limits for the
-spectroscopy.
-This relates to our motivating examples of \project{SDSS} and
-\project{SDSS-V}, where the spectrographs are being used on sources 5
-to 10 magnitudes brighter than the limits of the imaging.
-In this case, it can become (effectively) the case that there is no
-distinction to be made between the data $y_n$ on source $n$ and the
-true, latent properties $z_n$ of source $n$.
-That is, at the precision of interest, it can become the case that
-$y_n\equiv z_n$, or the observed data are effectively the source's
-true properties.
-In this case there is no marginalization over the noise model
-$p(y_n\given z_n)$ required, and the likelihood function becomes
-\begin{gather}
-\ln p(\set{y_n}_{n=1}^{N}\given\theta)
- = \sum_{n=1}^N \ln\lambda_0(y_n\given \theta) - Q(\theta) + \mbox{const}
-\label{eq:good}
-\\
-Q(\theta) = \int\lambda_0(y_n\given \theta)\,S(y_n)\,\dd y_n
-\quad ,
-\end{gather}
-where the $S(y_n)$ has disappeared from the sum because it (or really
-the log of it) is an irrelevant constant (independent of the important
-parameters $\theta$).
-That irrelevant constant can't be ignored if the selection function
-itself has free parameters that you want to fit or infer or
-marginalize simultaneously with your populations inference.
-
-Of course, in this ``good-data'' limit, there is still an
-\foreign{a posteriori} selection function acting---sources can be
-observed but not successfully analyzed and included in the
-catalog---but again in these projects, often the spectroscopy is taken
-at such high signal-to-noise that \foreign{a posteriori}
-incompleteness is not a significant issue.
-If we add that criterion to the criteria for being in the good-data
-limit, the simpler form of the likelihood function in
-\equationname~(\ref{eq:good}) can be justified.
-That is, the good-data limit can be achieved, and has been for many
-high signal-to-noise surveys (HOGG CITE THINGS?), but the criteria
-are definitely severe.
-
 \section{Correct the data or correct the model?}\label{sec:correct}
 
 The sample of data you get is like a measurement of the universe, but
 the universe multiplied by the selection function.
-In the easy cases (\sectionname~\ref{sec:easy}), the selection function
+In the easy cases for probabilistic inference (see \appendixname~\ref{app:easy}),
+the selection function
 $S(y_n)$ is a function only of the observed data $y_n$.
 Therefore it becomes tempting to divide the data by the selection
 function---or really re-weight the data by the inverse of the slection
@@ -719,8 +486,9 @@ quantitative comparisons between the weighted universe and the
 unweighted data.
 The strictly correct thing to do (or at least one method that will
 produce information-theory-saturating inferences) is to fit the data
-using one of the likelihood functions outlined in \sectionname
-s~\ref{sec:lf} and \ref{sec:easy}.
+using one of the likelihood functions outlined in 
+\appendixnames~\ref{app:lf} and \ref{app:easy}.
+
 However, it should be noted that when you weight the data by the
 inverse of the selection function, you only need to know the value of
 the selection function \emph{at each actual datum}.
@@ -733,17 +501,21 @@ resort.
 
 \section{Survey design for a good selection function}\label{sec:design}
 
-HOGG SYNTACTICAL
-
-Here we ask how to make good choices...
-
-\paragraph{Maintain high completeness:}
+We have looked at what properties a good selection function should
+have in \sectionname~\ref{sec:desiderata}, and we have looked at how
+it is used in \sectionname~\ref{sec:correct} and \appendixnames~\ref{app:lf} and \ref{app:easy}.
+Now to the main point of this \documentname, which is the question:
+How do we do we design a project or survey such that it will be easy
+to obtain a good selection function in the end?
+Here we list and discuss a set of considerations.
 
 \paragraph{Don't permit humans into the loop:}
 (And note that use of catalogs like Messier or Abell bring in humans
 by reference!)
 
 \paragraph{Select objects independently:}
+
+HOGG SYNTACTICAL
 
 \paragraph{Keep it as simple as possible:}
 
@@ -754,6 +526,8 @@ by reference!)
 \paragraph{Anticipate spatial conflicts:}
 
 \paragraph{Resolve conflicts randomly:}
+
+\paragraph{Maintain high completeness:}
 
 \section{How do you know that your survey design is good?}\label{sec:verify}
 
@@ -825,6 +599,7 @@ For example, what of this discussion carries over to two-point functions?
   Mapper} Collaboration (part of the \project{SDSS-V} Collaboration)
 for help with refining these principles.
 This work benefitted from our conversations with
+  Will Farr (Stony Brook) and
   Dan Foreman-Mackey (Flatiron).
 
 \facilities{
@@ -844,7 +619,265 @@ bar
 \bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal, 2017, arXiv e-prints, arXiv:1711.03234
 \bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
 \bibitem[Loredo(2004)]{loredo} Loredo, T.~J., 2004, American Institute of Physics Conference Series, 195
+\bibitem[Mandel \etal(2019)]{mfg} Mandel, I., Farr, W.~M., \& Gair, J.~R.\ 2019, \mnras, 486, 1086
 \bibitem[York \etal(2000)]{sdss} York, D.~G., Adelman, J., Anderson, J.~E., \etal, 2000, \aj, 120, 1579
 \end{thebibliography}
+
+\appendix
+
+\section{Dimensions of probabilistic quantities}
+
+Just to be exceedingly clear about dimensions, in the main text of
+this \documentname, and in these \appendixnames, a probability density
+function (pdf) $p(\cdot)$ has the properties
+\begin{gather}
+0 \leq   p(a\given b)        \quad \mbox{for all $a, b$,} \\
+1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$.}
+\end{gather}
+A rate density or density function $\lambda(\cdot)$ has the properties
+\begin{gather}
+                0 \leq   \lambda(a\given b)        \quad \mbox{for all $a, b$,} \\
+\left<N(b)\right> = \int \lambda(a\given b)\,\dd a \quad,
+\end{gather}
+where $\left<N(b)\right>$ is an expected number
+(which will depend, in general, on $b$).
+A selection function $S(\cdot)$ has the property
+\begin{equation}
+0\leq S(a, b)\leq 1 \quad \mbox{for all $a, b$.}
+\end{equation}
+
+\section{The catalog likelihood function}\label{app:lf}
+
+In this \sectionname, we show where the selection function appears in
+a probabilistic model, or likelihood function, for the source
+population.
+As we posited in the main text, we are designing a catalog or a targeted
+spectroscopic project
+with population-level statistical goals, for example HOGG XXX or YYY.
+Here we will imagine that the model of the population (for example the model
+of XXX or YYY) has parameters $\theta$.
+These parameters $\theta$ describe the properties of the true distribution
+of astronomical objects (galaxies, stars, supernovae, planets, or whatever)
+that would be oberved if we could see everything of interest completely and
+with high fidelity.
+The object (by assumption) is to determine these population-level parameters
+$\theta$.
+
+No matter how the data analysis is going to proceed, it is nonetheless
+useful to think in
+terms of a \emph{likelihood function}, or probability for the data given
+the parameters $\theta$ of interest.
+The likelihood function is the critical tool for Bayesian inference, and
+it is also the critical tool for constructing frequentist estimators that
+saturate information-theoretic bounds.
+It also follows that if the investigator \emph{can} write a likelihood
+function, then the investigator does know enough about the data to perform
+any kind of information-saturating inference.
+Therefore, we maximize statistical legacy value for a statistical project
+when we make it possible for investigators to construct a justifiable and
+computationally tractable likelihood function.
+
+For our purposes here, the likelihood function factorizes into three
+factors:
+The first factor is the population model.
+We assume that the population-level parameters $\theta$ generate the
+sources of interst.
+That is, the parameters $\theta$ parameterize a probability density
+function (pdf) $p_0(\set{z_n}\given\theta)$
+for the set of true properties $\set{z_n}$ of all of the sources $n$
+in the Galaxy (we will posit for now that the objects of study are
+stars in the Milky Way; they could be galaxies in the Universe or
+planets in the solar neighborhood or anything else).
+This is the first of the three factors that make up the likelihood
+function.
+We subscript it with a $0$ to indicate that
+this is a model of the true world;
+it is the pdf you would observe if you saw everything perfectly.
+
+This population model $p_0(\set{z_n}\given\theta)$ could have any arbitrarily
+complicated form.
+However, for our purposes here, we are going to assume it has a certain kind
+of separability.
+That is, we are going to assume that the objects are conditionally independent,
+or independently drawn, conditioned on the parameters $\theta$.
+This is like saying that the model is a variable-rate Poisson process.
+Under this assumption, the model can be written as a product over sources (or sum in the log), like so:
+\begin{equation}
+\ln p_0(\set{z_n}\given\theta) = \sum_n \ln \lambda_0(z_n\given\theta) - Q(\theta)
+\end{equation}
+where $Q(\theta)$ is a normalization factor that we will discuss below,
+and the
+individual-source models $\lambda_0(z_n\given\theta)$ represent the
+density functions (number of sources per unit volume in the $z$-space)
+for individual sources given the population parameters $\theta$.
+This assumption---that the population model can be written as a product over
+sources---is used frequently in astrophysics projects.
+In this approximation, there can be no information two-point or
+higher-order statistics of the data; or nothing can be learned from
+source pairs that can't be learned combining information from the
+individual members of those pairs.
+Among other things, this formalism or assumption is at odds with
+models that specify source--source correlation functions.
+
+The second factor in the likelihood function is
+a noise model $p(y_n\given z_n)$, which gives a probability density for
+observing observed properties $y_n$ for source $n$ under the assumption
+that it has true properties $z_n$.
+In the case that the true properties are things like true brightnesses
+and true colors for the stars, this noise model $p(y_n\given z_n)$ is
+very simple (it is just the noise properties of the data.
+This noise model is more complex if the true properties are things like
+stellar masses or ages, where the connection to the noisy observables is
+less direct.
+This noise model depends in detail on having a good model for how the
+observing instrumentation works, or in fact how the whole chain of causation
+works from the true properties $z_n$ to the observed values $y_n$.
+If this model contains uncertain parameters (unknown gains, say, or
+unknown read noise, or \foreign{etc.}), then this function
+$p(y_n\given z_n)$ could be conditioned on additional noise-model
+parameters and these could be fit or inferred or marginalized out
+simultaneously with the population-level parameters $\theta$. WE MAY
+RETURN TO THIS LATER.
+
+It is worth emphasizing an assumption here:
+By writing this noise model at the individual-source level as
+$p(y_n\given z_n)$
+and not at the whole-catalog level
+$p(\set{y_n}\given\set{z_n})$,
+we have assumed that the observed properties $y_n$ of source $n$
+depend only on the true properties $z_n$ \emph{of that source}.
+This is another kind of assumption of independence:
+Technically this independence can be broken in real surveys by,
+for example, calibration noise, which correlates the wrongness of
+every source in some patch.
+But we make this assumption because it is often very close to being
+correct, and it will keep the likelihood function tractable.
+
+The third factor in the likelihood function is the selection function,
+described in the previous \sectionname.
+This is the function $S(y_n,z_n)$ that gives the probability that a
+source was included in the catalog, given its observed or true
+properties (or both).
+As with the noise model, the selection function can also depend on
+unknown parameters, which can also be fit or inferred or marginalized
+simultaneously with the population-level parameters $\theta$.
+We will return to this point HOGG WHERE?
+Once again, in this third factor we have made a third assumption of
+independence, which we discussed in \sectionname~\ref{sec:desiderata}.
+
+The three likelihood factors combine into the complete, marginalized
+likelihood function $p(\set{y_n}\given\theta)$ as follows:
+\begin{gather}
+\ln p(\set{y_n}_{n=1}^{N}\given\theta)
+ = \sum_{n=1}^N \ln\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n - Q(\theta)
+\label{eq:lf}
+\\
+Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)\,\dd z_n\,\dd y_n
+\quad .
+\end{gather}
+This likelihood function is \emph{marginalized} in the sense that we
+have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
+
+This (\ref{eq:lf}) is the likelihood function used in our Milky Way
+and exoplanet populations work (\citealt{bovy, exopop}; HOGG OTHER
+CITATIONS?).
+
+This (\ref{eq:lf}) is not, however, precisely the likelihood function
+used in some other but similar contexts (\citealt{loredogrb, loredo,
+  mfg}).
+The difference is that in the latter projects, the selection function
+does not appear in the sum; it only appears in the normalization $Q(\theta)$.
+This difference flows from some different assumptions about how the
+data are generated and censored; in particular these other projects assume
+that the censoring depends only on the observed data $y_n$, and that it is
+deterministic given $y_n$.
+We are (effectively) assuming that the universe plus the survey are
+jointly working together to generate a data stream which might be
+censored on the basis of both observed data $y_n$ and latent source
+properties $z_n$, and where the censoring might be probabilistic, even
+conditioned on both $y_n$ and $z_n$.
+That jointly generated data stream is being treated (by us) as a
+variable-rate Poisson process.
+Further discussion of the subtleties of the derivation of this
+likelihood is out of scope in this \documentname.
+
+But importantly, these subtlties do not matter for the subject at hand:
+The comments we make in the main text about the form of the
+selection function, and about requirements on survey design and target
+selection, are all invariant to this subtle statistical question about
+the form of the likelihood function.
+
+\section{Catalog likelihoods: The easy cases}\label{app:easy}
+
+Continuing with the form of the likelihood function, here we point out
+situations in which it becomes simpler than the expression presented
+in equation~(\ref{eq:lf}).
+The first observation to make is that the integrals inside the sum are
+over the true properties $z_n$, not the observed properties $y_n$.
+This means that if the selection function $S(\cdot)$ depends only on
+the observed properties $y_n$ and not on any unobserved latent parameters,
+the selection function $S(y_n)$ can be put in front of that integral.
+And since the logarithm is being taken, and $S(y_n)$ (by assumption)
+doesn't depend on the population-level parameters, it can be removed
+entirely from the expression as an irrelevant constant term (this is
+noted previously in \citealt{bovy}).
+In this case, the selection function appears in the integral
+$Q(\theta)$ but not at all in the sum of logarithms, which
+makes it effectively identical to the likelihood
+constructed under the alternate assumptions mentioned above
+(\citealt{loredo, mfg}), where, indeed, the censoring is assumed to
+depend only on the observed data $y_n$.
+
+In many cases, it is not an investigator choice whether the selection
+function is delivered in terms of $y_n$ or $z_n$ or both, but when it
+is a choice, it is useful to choose to deliver it in terms of the
+observed quantities $y_n$.
+We will return to this point in \sectionname~\ref{sec:estimate}, where
+we discuss how the selection function is estimated or determined.
+
+The other---and perhaps more general---observation to make is that
+sometimes the source selection is being performed in \emph{extremely
+  good data}.
+For example, when targets are being chosen for spectroscopy, in
+imaging that is much deeper than the magnitude limits for the
+spectroscopy.
+This relates to our motivating examples of \project{SDSS} and
+\project{SDSS-V}, where the spectrographs are being used on sources 5
+to 10 magnitudes brighter than the limits of the imaging.
+In this case, it can become (effectively) the case that there is no
+distinction to be made between the data $y_n$ on source $n$ and the
+true, latent properties $z_n$ of source $n$.
+That is, at the precision of interest, it can become the case that
+$y_n\equiv z_n$, or the observed data are effectively the source's
+true properties.
+In this case the noise model $p(y_n\given z_n)$ becomes a
+delta function and the likelihood function becomes
+\begin{gather}
+\ln p(\set{y_n}_{n=1}^{N}\given\theta)
+ = \sum_{n=1}^N \ln\lambda_0(y_n\given \theta) - Q(\theta) + \mbox{const}
+\label{eq:good}
+\\
+Q(\theta) = \int\lambda_0(y_n\given \theta)\,S(y_n)\,\dd y_n
+\quad ,
+\end{gather}
+where the $S(y_n)$ has disappeared from the sum because it (or really
+the log of it) is an irrelevant constant (independent of the important
+parameters $\theta$).
+That irrelevant constant can't be ignored if the selection function
+itself has free parameters that you want to fit or infer or
+marginalize simultaneously with your populations inference.
+
+Of course, in this ``good-data'' limit, there is still an
+\foreign{a posteriori} selection function acting---sources can be
+observed but not successfully analyzed and included in the
+catalog---but again in these projects, often the spectroscopy is taken
+at such high signal-to-noise that \foreign{a posteriori}
+incompleteness is not a significant issue.
+If we add that criterion to the criteria for being in the good-data
+limit, the simpler form of the likelihood function in
+\equationname~(\ref{eq:good}) can be justified.
+That is, the good-data limit can be achieved, and has been for many
+high signal-to-noise surveys (HOGG CITE THINGS?), but the criteria
+are definitely severe.
 
 \end{document}
