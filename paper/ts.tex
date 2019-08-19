@@ -612,6 +612,7 @@ bar
 }
 
 \begin{thebibliography}{}
+\bibitem[Bernstein \etal(2004)]{bernstein} Bernstein, G.~M., Trilling, D.~E., Allen, R.~L., \etal, 2004, \aj, 128, 1364
 \bibitem[Bovy \etal(2012)]{bovy} Bovy, J., Rix, H.-W., Liu, C., \etal, 2012, \apj, 753, 148
 \bibitem[Colless \etal(2001)]{2df} Colless, M., Dalton, G., Maddox, S., \etal, 2001, \mnras, 328, 1039
 \bibitem[Foreman-Mackey(2014)]{blogpost} Foreman-Mackey, D., 2014, The Histogram (blog post), \url{https://dfm.io/posts/histogram1/}
@@ -619,7 +620,7 @@ bar
 \bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal, 2017, arXiv e-prints, arXiv:1711.03234
 \bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
 \bibitem[Loredo(2004)]{loredo} Loredo, T.~J., 2004, American Institute of Physics Conference Series, 195
-\bibitem[Mandel \etal(2019)]{mfg} Mandel, I., Farr, W.~M., \& Gair, J.~R.\ 2019, \mnras, 486, 1086
+\bibitem[Mandel \etal(2019)]{mfg} Mandel, I., Farr, W.~M., \& Gair, J.~R., 2019, \mnras, 486, 1086
 \bibitem[York \etal(2000)]{sdss} York, D.~G., Adelman, J., Anderson, J.~E., \etal, 2000, \aj, 120, 1579
 \end{thebibliography}
 
@@ -784,19 +785,17 @@ Q(\theta) = \int\!\int\lambda_0(z_n\given \theta)\,p(y_n\given z_n)\,S(y_n, z_n)
 This likelihood function is \emph{marginalized} in the sense that we
 have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
 
-This (\ref{eq:lf}) is the likelihood function used in our Milky Way
-and exoplanet populations work (\citealt{bovy, exopop}; HOGG OTHER
-CITATIONS?).
-
-This (\ref{eq:lf}) is not, however, precisely the likelihood function
-used in some other but similar contexts (\citealt{loredogrb, loredo,
-  mfg}).
-The difference is that in the latter projects, the selection function
+This (\ref{eq:lf}) is the likelihood function used in our exoplanet
+populations work (\citealt{exopop}).
+It is very related to likelihoods
+used in other context by us and others (\citealt{loredogrb, bernstein,
+  bovy}).
+There are some differences however;
+in many projects, the selection function
 does not appear in the sum; it only appears in the normalization $Q(\theta)$.
 This difference flows from some different assumptions about how the
 data are generated and censored; in particular these other projects assume
-that the censoring depends only on the observed data $y_n$, and that it is
-deterministic given $y_n$.
+that the censoring depends only on the observed data $y_n$.
 We are (effectively) assuming that the universe plus the survey are
 jointly working together to generate a data stream which might be
 censored on the basis of both observed data $y_n$ and latent source
@@ -869,9 +868,11 @@ Q(\theta) = \int\lambda_0(y_n\given \theta)\,S(y_n)\,\dd y_n
 where the $S(y_n)$ has disappeared from the sum because it (or really
 the log of it) is an irrelevant constant (independent of the important
 parameters $\theta$).
+This form has appeared and been used for inference previously (\cite{bernstein, bovy}).
 That irrelevant constant can't be ignored if the selection function
 itself has free parameters that you want to fit or infer or
-marginalize simultaneously with your populations inference.
+marginalize simultaneously with your populations inference;
+we discuss this case in the main text in \sectionname~\ref{sec:estimate}.
 
 Of course, in this ``good-data'' limit, there is still an
 \foreign{a posteriori} selection function acting---sources can be
