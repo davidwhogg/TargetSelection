@@ -445,37 +445,65 @@ HOGG SYNTACTICAL
 
 \section{How do you know that your survey design is good?}\label{sec:verify}
 
-\section{How do you measure or test the selection function?}\label{sec:estimate}
+\section{How do you determine the selection function?}\label{sec:estimate}
 
 HOGG SYNTACTICAL
 
 \section{How to use the selection function?}\label{sec:howto}
 
-HOGG, ADD GENERAL WORDS, REFERRING DOWN TO THE APPENDICES. Maybe move
-some material from the appendices here, so the appendices ONLY contain
-the LF justification.
+How is the selection function used for inference?
+The basic answer is that any model of the universe (the whole galaxy
+or the whole Universe or the whole planet population, for examples)
+is only a model of what's in your catalog after it has been multiplied
+by the selection function.
+That is, the catalog model (the model of the catalog-generating process)
+is a model of the process that
+creates the universe followed by a model of the process that censors or
+probabilistically selects sources from that universe for inclusion in the catalog.
+The inference of the properties of the universe of sources proceeds
+by comparing the catalog model to the observed catalog.
+That is, the inference  proceeds by comparing the observed catalog
+of sources to a model which is a product of the universe model and the
+selection function.
 
-In the \appendixnames\ we discuss how to use the selection function
-to perform an inference about the population through a likelihood
-function.
-Part of that story is that the sample of data you get is like a
-measurement of the universe, but where the universe was first
-multiplied by the selection function.
-So can't you see the universe by just dividing the data by the
-selection function?
-Or do you really have to multiply the model of the universe by the
-selection function to build a good model for your data?
+HOGG: HWR SAY: Put an equation in here and refer down to the appendices.
+
+No matter how the comparison is going to be done (the comparison between
+observed catalog and catalog model), it is nonetheless
+useful to think in
+terms of a \emph{likelihood function}, or probability for the data given
+the parameters $\theta$ of interest.
+The likelihood function is the critical tool for Bayesian inference, and
+it is also the critical tool for constructing frequentist estimators that
+saturate information-theoretic bounds.
+It also follows that if the investigator \emph{can} write a likelihood
+function, then the investigator does know enough about the data to perform
+any kind of information-saturating inference.
+Indeed, our desiderata for the selection function given in
+\sectionname~\ref{sec:desiderata} all flow from considerations related
+to this likelihood function.
+
+The message is that statistical legacy value is maximized for a
+statistical project when it is possible for investigators to construct
+a justifiable and computationally tractable likelihood function.
+Because the details are somewhat off-topic, we use the
+\appendixnames\ to construct a version of this likelihood function.
+The general
+answer is given in \equationname~(\ref{eq:lf}) and a simpler version
+is presented in \appendixname~\ref{app:easy}.
+These likelihood functions are possible to construct and compute when the
+selection-function has the good properties we argue for in
+\sectionname s~\ref{sec:desiderata} and \ref{sec:design}.
 
 \paragraph{Should you multiply the model or divide the data?}
-In many cases (see \appendixname~\ref{app:easy}),
-the selection function
-$S(y_n)$ is a function only of the observed data $y_n$.
-In this case it becomes tempting to divide the data by the selection
+We said that the model for the catalog is the universe model times a
+selection function.
+But doesn't that tempt us (instead) to divide the data by the selection
 function---or really re-weight the data by the inverse of the slection
 function---to get a weighted data set that looks much more like the
-universe than the unweighted data set.
+universe than the unweighted data set?
 That's a sensible idea, and the basis of a lot of astrophysics, going
-all the way back to the V-max method for the determination of the quasar
+all the way back to the 1/V-max method for the determination of the quasar
 luminosity function (\citealt{schmidt}) and continuing in a long literature on the
 luminosity functions of galaxies (for example, \citealt{cowie, blanton, faber}).
 However, it is not the best use of the data:
@@ -490,11 +518,10 @@ That is, a lot of the effective mass in the data can become dominated by
 a small number of sources.
 And, worse than that, these sources will tend to be near the edge of
 what's detectable or at the edges of the effective parameter space, so
-they are likely to be less reliable in general.
+they are likely to be less reliable in general, or possibly even outliers.
 The disparity in the weights leads to a reduction in the effective size
-of your source catalog.
-If you have weighted your data with weights $w_n$ (which are inverse
-probabilities in this case), and different catalog entries get
+of your catalog:
+If you have $N$ sources with weights $w_n$, and different catalog entries get
 different weights, the effective size $N_\mathrm{eff}$ of your catalog
 is no longer $N$.
 It is given by
@@ -530,11 +557,6 @@ re-weight the data by the inverse of the selection function.  It is to
 weight the universe model by the selection function, and make
 quantitative comparisons between the weighted universe and the
 unweighted data.
-The strictly correct thing to do (or at least one method that will
-produce information-theory-saturating inferences) is to fit the data
-using one of the likelihood functions outlined in 
-\appendixnames~\ref{app:lf} and \ref{app:easy}.
-
 However, it should be noted that when you weight the data by the
 inverse of the selection function, you only need to know the value of
 the selection function \emph{at each actual datum}.
@@ -544,6 +566,11 @@ know the selection function at the locations of the data.
 It's not an argument \emph{for} weighting by inverse selection, but it
 is some kind of pragmatic justification for this method of last
 resort.
+
+\section{Contamination and backgrounds}\label{sec:bg}
+
+HWR: DO WE HAVE A SECTION ON CONTAMINATION? I feel like we need to,
+but if we do, it brings in many new concepts and issues.
 
 \section{How well do you need to know the selection function?}\label{sec:quality}
 
@@ -555,15 +582,6 @@ Let's make that explicit here, cite Bovy.
 
 When we say you don't have to know everything about the SF, that could be
 in space, in time, in Fourier Space, in magnitude, and so on.
-
-\section{Contamination and backgrounds}\label{sec:bg}
-
-HWR: DO WE HAVE A SECTION ON CONTAMINATION? I feel like we need to,
-but if we do, it brings in many new concepts and issues.
-
-\section{Spatial selections}
-
-Select on clustering? What's wrong with that? Fiber collisions. Crowding.
 
 \section{Open issues}
 
@@ -602,6 +620,8 @@ A great example is dust extinction and reddening.
 Note that, in principle, the survey only needs to be simulated, it doesn't have
 to be understood!
 
+\paragraph{Do we need to model the humans?}
+
 \section{Discussion}
 
 Come back to the assumptions made and talk about what happens when we
@@ -637,9 +657,11 @@ This work benefitted from our conversations with
 
 \section{Dimensions of probabilistic quantities}
 
-Just to be exceedingly clear about dimensions, in the main text of
-this \documentname, and in these \appendixnames, a probability density
-function (pdf) $p(\cdot)$ has the properties
+The development of the catalog likelihood function in
+\appendixname~\ref{app:lf} depends on probabilistic quantities that
+obey particular rules.
+
+A probability density function (pdf) $p(\cdot)$ has the properties
 \begin{gather}
 0 \leq   p(a\given b)        \quad \mbox{for all $a, b$,} \\
 1 = \int p(a\given b)\,\dd a \quad \mbox{for all $b$,}
@@ -664,13 +686,18 @@ everywhere either zero or unity.
 
 \section{The catalog likelihood function}\label{app:lf}
 
-In this \sectionname, we show where the selection function appears in
-a probabilistic model, or likelihood function, for the source
-population.
+As we note in \sectionname~\ref{sec:howto}, the way to perform a populations
+inference is to multiply your model of the uncensored universe by the
+selection function and compare it to the data.
+The best comparison is made through a justified likelihood function.
+Here we construct that function.
+This discussion is worth comparing to prior discussions (including
+especially \citealt{loredo, bovy, exopop, mfg}).
+
 As we posited in the main text, we are designing a catalog or a targeted
 spectroscopic project
 with population-level statistical goals, for example HOGG XXX or YYY.
-Here we will imagine that the model of the population (for example the model
+Imagine that the model of the population (for example the model
 of XXX or YYY) has parameters $\theta$.
 These parameters $\theta$ describe the properties of the true distribution
 of astronomical objects (galaxies, stars, supernovae, planets, or whatever)
@@ -679,22 +706,7 @@ with high fidelity.
 The object (by assumption) is to determine these population-level parameters
 $\theta$.
 
-No matter how the data analysis is going to proceed, it is nonetheless
-useful to think in
-terms of a \emph{likelihood function}, or probability for the data given
-the parameters $\theta$ of interest.
-The likelihood function is the critical tool for Bayesian inference, and
-it is also the critical tool for constructing frequentist estimators that
-saturate information-theoretic bounds.
-It also follows that if the investigator \emph{can} write a likelihood
-function, then the investigator does know enough about the data to perform
-any kind of information-saturating inference.
-Therefore, we maximize statistical legacy value for a statistical project
-when we make it possible for investigators to construct a justifiable and
-computationally tractable likelihood function.
-
-For our purposes here, the likelihood function factorizes into three
-factors:
+The likelihood function factorizes into three factors:
 The first factor is the population model.
 We assume that the population-level parameters $\theta$ generate the
 sources of interst.
