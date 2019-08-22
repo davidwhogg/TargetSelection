@@ -377,9 +377,9 @@ for example, the sample is thinned in high-density regions, or only
 the brightest sources are taken in some fields).
 We will say more about this in \sectionname~\ref{sec:design}.
 
-\paragraph{Select on observables if possible} HOGG THIS NEEDS REVIEW AND REWRITE.
+\paragraph{Select on observables if possible}
 One thing that makes life easier, as we discuss in \appendixname~\ref{app:easy},
-is to try to make the selection function depend only on the observed
+is if the selection function depends only on the observed
 properties $y_n$ and not at all on the latent properties $z_n$.
 This makes some of the inference of populations easier.
 However, this is only helpful, not a requirement.
@@ -396,6 +396,10 @@ probability marginalizing out the unobserved properties of the source
 that are affecting its inclusion in the catalog.
 It is the existence of such unmodeled effects that makes $S(y_n, z_n)$
 a finite probability rather than a deterministic zero or unity.
+In the language of causal inference, the selection $S(\cdot)$ is a
+probability because there are in general confounders---properties of
+the source that are not part of your model that nonetheless have an
+effect on the selection.
 
 \paragraph{Counterfactual evaluation}
 Finally, one important comment: When we perform population inferences,
@@ -417,15 +421,35 @@ biased (\citealt{blogpost}).
 
 We have looked at what properties a good selection function should
 have in \sectionname~\ref{sec:desiderata}, and we have looked at how
-it is used in \sectionname~\ref{sec:howto} and \appendixnames~\ref{app:lf} and \ref{app:easy}.
+it is used in \sectionname~\ref{sec:howto}
+and \appendixnames~\ref{app:lf} and \ref{app:easy}.
 Now to the main point of this \documentname, which is the question:
-How do we do we design a project or survey such that it will be easy
+How do we design a project or survey such that it will be easy
 to obtain a good selection function in the end?
 Here we list and discuss a set of considerations.
 
 \paragraph{Don't permit humans into the loop:}
-(And note that use of catalogs like Messier or Abell bring in humans
-by reference!)
+Perhaps the most important consideration is that the selection of sources
+must be algorithmic.
+This does not mean that the design of the algorithms can't include
+human judgement. They must!
+This means that once the algorithms are designed and built, they must
+be run by a computer; they cannot involve any human judgement.
+The fundamental reason for this is that our model of the selection
+function cannot (practically) contain within it a model of the human
+judgements that were made.
+They can, of course, but the selection function model in this case
+would necessarily be very approximate.
+
+One strange aspect of this is that the selection of objects can only
+rarely make use of catalogs in the historical literature (like the known
+globular clusters CITE, the Messier Catalog CITE, and so on).
+These historical catalogs (and many contemporary catalogs, for example CITE)
+involve human judgement in their creation.
+This human judgement is extremely hard to model or account for in any
+model of the selection function.
+In general, you want to select your sources algorithmically from
+catalogs and data that themselves have been generated algorithmically.
 
 \paragraph{Select objects independently:}
 
