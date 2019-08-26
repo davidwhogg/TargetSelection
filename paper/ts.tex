@@ -122,17 +122,80 @@ used for inference, but at information-theoretic cost.
 \section*{}\clearpage
 \section{Why source selection matters}\label{sec:intro}
 
-Many projects in conteporary astrophysics proceed by obtaining
-wide-field imaging and then selecting targets for spectroscopic
-follow-up.
+Imagine that you want to learn the exponential scale length of the
+Milky Way disk.
+One approach is to take spectroscopy of stars in some region or box in
+color--magnitude space, work out their distances using spectroscopic
+parallaxes, and then perform inference on that catalog.
+But of course the distribution of stars in your sample will not
+follow the exponential distribution expected from a pure exponential-disk
+model.
+This is for two reasons:
+The first is that your measurements of distance will be noisy.
+The second---and more important---is that your selection of stars in
+some color-magnitude box enormously affects the distribution of stars
+you actually get in your sample.
+This is a classic version of a \emph{selection effect} and, if you
+have made your sample sensibly, it can be described in terms of a
+\emph{selection function}.
+
+More formally, let's imagine that your model of the Milky Way says
+that the true properties $z$ (these might be distances, but also
+metallicities, temperatures, and so on) of stars should be distributed
+according to some true density function $\lambda_0(z\given\theta)$.
+This function $\lambda_0(z\given\theta)$ delivers the expected number
+density of stars in the Milky Way (number per $z$-space or property-space volume)
+as a function of $z$.
+This rate function has parameters $\theta$, which could be (in this
+example) the total number and scale length and scale height of the
+Galaxy disk.
+
+The density of stars $\lambda(x\given\theta)$ you expect to get
+\emph{in your catalog} is, however, very different from this, and it
+is a function not of true stellar properties $z$ but rather of noisily
+observed properties $x$, which could be in photometry space or
+spectrum space or other spaces.
+This function $\lambda(x\given\theta)$ delivers the expected number
+density of stars in your catalog (number per $x$-space or observed-data volume)
+as a function of observed data $x$.
+This rate function is a product of the true density $\lambda_0(\cdot)$
+times a \emph{selection function} $S(x)$ which describes the
+probability that the source would have entered the catalog:
+\begin{equation}
+\lambda(x\given\theta) = S(x)\,\int\lambda_0(z\given\theta)\,p(x\given z)\,\dd z
+\quad,
+\end{equation}
+where $p(x\given z)$ is a likelihood function, or the probability
+density that you would observe data $x$ if the star has true
+properties $z$, and the integral is over the whole possible domain of
+true properties $z$.
+The likelihood function $p(x\given z)$ corrects the true density function
+for the fact that the observations are noisy; the integral makes this a
+kind of convolution.
+The selection function $S(x)$ corrects the density function for the
+selection effects.
+Inference of the parameters $\theta$ of the Galaxy proceeds by
+building a model of your observed catalog in the context of this
+convolved, selected rate $\lambda(x\given\theta)$ in the data space
+$x$.
+
+Our goal in this \documentname\ is to discuss the conditions under
+which this selection function can be well understood in a real survey.
+It turns out that if you want this selection function to be both
+accurately known and simple to operate, there are rules that a project
+must follow.
+
+Many projects in conteporary astrophysics proceed in this manner:
+Obtain wide-field imaging; select targets for spectroscopic follow-up
+in some color--magnitude region; and perform inferences of planet,
+star, supernova, galaxy, or quasar populations.
 This mode is very old, but it became truly data-intensive with
 the \project{Sloan Digital Sky Survey} (\citealt{sdss})
 and \project{2dF} (\citealt{2df})
 projects, which mapped the large-scale structure to test and learn the
 cosmological model.
 Now there are projects with this character in a range of different
-astrophysics sub-fields, including cosmology, Galactic archaeology,
-stellar astrophysics, transient characterization, and exoplanet search.
+astrophysics sub-fields.
 The successes have been legion:
 We know the parameters of the cosmological model at percent-level
 precision, supernovae of many types have been found and monitored,
@@ -145,13 +208,10 @@ spectroscopic data they take, and equally (or even more importantly)
 on the way the spectroscopic targets were selected from the original
 imaging data.
 
-More generally, whenever a set of astronomical sources has been chosen
-for study... assembled into a catalog... HOGG
-
-Once a project is building a catalog with thousands to millions of entries, the
-end-to-end uncertainties in the results it produces tend to be
-dominated not by the shot noise (square-root-of-$N$) or sample size,
-but rather the ability to understand the selection effects.
+Once a project is building a catalog with thousands to millions of
+entries, the end-to-end uncertainties in the results it produces tend
+to be dominated not by the shot noise (square-root-of-$N$) or sample
+size, but rather the ability to understand the selection effects.
 That is, to make precise measurements of a population of galaxies or
 stars or planets, we need to know what galaxies or stars or planets
 were and were not selected, and what would
