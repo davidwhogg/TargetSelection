@@ -300,10 +300,15 @@ spectra) or higher-order spatial statistics.
 The measurement of these spatial statistics bring additional issues
 that are also out of scope here.
 
-\section{Scientific goals: Two examples}
+\section{Scientific goals: A toy example}\label{sec:toy}
 
-HWR: Should we explain some example scientific goals here, and make
-them ``fiducials'' for what follows?
+HOGG: Describe the fake goal
+
+HOGG: Describe the fake data
+
+HOGG: Describe the selection function
+
+HOGG: Note the independence assumption and its technical wrongness.
 
 \section{The selection function}\label{sec:sf}
 
@@ -511,22 +516,67 @@ This human judgement is extremely hard to model or account for in any
 model of the selection function.
 In general, you want to select your sources algorithmically from
 catalogs and data that themselves have been generated algorithmically.
-
-\paragraph{Select objects independently:}
-
-HOGG SYNTACTICAL
+If you don't you still might be able to recover the selection function
+to some level of precision, but the methods available to you for its
+determination (\sectionname~\ref{sec:estimate}) will be limited.
+Or you can use the more limited inference methods that don't require
+that the selection function be known (\sectionname~\ref{sec:avoid}).
 
 \paragraph{Keep it as simple as possible:}
+
+HOGG SYNTACTICAL
 
 \paragraph{Keep to quantities you can model or predict:}
 
 \paragraph{Avoid making cuts on signal-to-noise:}
 
-\paragraph{Anticipate spatial conflicts:}
+\paragraph{Select objects independently:}
+
+In principle the likelihood function involved in inference
+(\appendixname~\ref{app:lf}) is a probability for your whole catalog
+$\set{x_n}_{n=1}^N$ of sources, given the population-level parameters
+$\theta$.
+In this context, you don't necessarily need to treat every source
+independently; you \emph{could} select collections of objects in
+non-trivial ways.
+And, at some level, our toy example (\sectionname~\ref{sec:toy}) has
+this property, because within any field, we could only take spectra
+of 32 sources (HOGG CONFIRM).
+That's a selection based on the properties of a set of sources (the
+set that fits within one field).
+
+However, in performing inferences on finite computing resources,
+it helps enormously, and is (in practice) only really possible, if the 
+sources are selected \emph{independently}.
+Here ``independently'' means that each source is selected or not based
+only on the properties \emph{of that source}.
+Really the requirement is that the assumption that they have been
+selected independently is a reasonable assumption given the precision
+of your inferences.
+But the closer you can get to having independent source selection the
+better.
+
+There are many operational constraints that a survey can have that
+breaks this independence.
+
+HOGG... Too many sources for the available fibers or telemetry.
+
+HOGG... related: Fiber collisions
+
+HOGG... Doing two surveys at once
+
+When the imaging is crowded, so sources are overlapping and must be
+deblended before they are photometered and selected, the properties of
+a source, as observed, can depend in complex ways on the properties of
+the other sources that overlapped it.
 
 \paragraph{Resolve conflicts randomly:}
 
-\paragraph{Maintain high completeness:}
+HOGG When you hit conflict issues, it behooves you to resolve conflicts randomly. Why?
+
+\paragraph{Anticipate spatial conflicts:}
+
+\paragraph{Maintain high a posteriori completeness:}
 
 \section{How do you know that your survey design is good?}\label{sec:verify}
 
@@ -665,6 +715,12 @@ It's not an argument \emph{for} weighting by inverse selection, but it
 is some kind of pragmatic justification for this method of last
 resort.
 
+\section{Can you avoid using the selection function entirely?}\label{sec:avoid}
+
+HOGG Oddly the answer to this is \emph{yes}. Conditional probabilities!
+
+HOGG This costs information. Tons of information. Example: Go back to the toy.
+
 \section{Contamination and backgrounds}\label{sec:bg}
 
 HWR: DO WE HAVE A SECTION ON CONTAMINATION? I feel like we need to,
@@ -712,13 +768,23 @@ times we use \emph{during} the survey, based on what we see.
 Are these both interesting to our study?
 
 \paragraph{Select on apparent or intrinsic properties?}
-A great example is dust extinction and reddening.
+HOGG A great example is dust extinction and reddening.
 
 \paragraph{Likelihood-free and simulation-based inferences}
-Note that, in principle, the survey only needs to be simulated, it doesn't have
+HOGG Note that, in principle, the survey only needs to be simulated, it doesn't have
 to be understood!
 
 \paragraph{Do we need to model the humans?}
+
+HOGG Even if you have done everything right, you made your choices because of things
+you know, observationally, about the sky and the sources of interest.
+
+HOGG This means that even your \foreign{a priori} selection isn't really prior to
+your inferences about the sources you are studying.
+
+HOGG Does this lead to biases? Almost certainly.
+
+HOGG Call out the failure-to-reproduce issue.
 
 \section{Discussion}
 
