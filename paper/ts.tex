@@ -6,7 +6,7 @@
 % - make a to-do list
 % - make style notes
 % - make sure the document structure is related to the mind map (email 2019-08-13)
-% - deal with HWR comments in PDF emailed 2019-08-26
+% - Title okay?
 % - ...
 
 % Style notes
@@ -123,33 +123,51 @@ used for inference, but at information-theoretic cost.
 \section*{}\clearpage
 \section{Why source selection matters}\label{sec:intro}
 
+Let's start with an example:
 Imagine that you want to learn the exponential scale length of the
 Milky Way disk.
 One approach is to take spectroscopy of stars in some region or box in
-color--magnitude space, work out their distances using spectroscopic
-parallaxes, and then perform inference on that catalog.
-But of course the distribution of stars in your sample will not
+color--magnitude space in some region or fields on the sky,
+work out their distances using spectroscopically determined absolute
+magnitudes, that is, spectroscopic
+parallaxes.
+We will then perform inference on that catalog.
+But of course the distribution of stars in the sample or catalog you have produced will not
 follow the exponential distribution expected from a pure exponential-disk
 model.
 This is for two reasons:
 The first is that your measurements of distance will be noisy.
-The second---and more important---is that your selection of stars in
+The second---and far more important---is that your selection of stars in
 some color-magnitude box enormously affects the distribution of stars
 you actually get in your sample.
 This is a classic version of a \emph{selection effect} and, if you
-have made your sample sensibly, it can be described in terms of a
+have designed your experiment sensibly, it can be described in terms of a
 \emph{selection function}.
 
 More formally, let's imagine that your model of the Milky Way says
-that the true properties $z$ (these might be distances, but also
-metallicities, temperatures, and so on) of stars should be distributed
-according to some true density function $\lambda_0(z\given\theta)$.
-This function $\lambda_0(z\given\theta)$ delivers the expected number
-density of stars in the Milky Way (number per $z$-space or property-space volume)
-as a function of $z$.
-This rate function has parameters $\theta$, which could be (in this
-example) the total number and scale length and scale height of the
-Galaxy disk.
+that the true properties $z$ of stars should be distributed
+according to some true density function $\lambda_0(z\given\theta)$,
+where $\theta$ is a set of parameters describing the physical model,
+for example the scale length, scale height, and overall stellar mass
+of the Milky Way disk.
+The properties $z$ might be foremost true Galactocentric position
+(possibly translated to heliocentric coordinates) and true luminosity,
+but also perhaps true metallicities, temperatures, and so on.
+The density function $\lambda_0(z\given\theta)$ delivers the expected
+number density of stars in the Milky Way (number per $z$-space or
+property-space volume) as a function of $z$.
+
+HOGG SYNTACTICAL; IN THE MIDDLE OF RIX COMMENTS.
+
+The whole experiment results in a catalog of objects, $\set{x_n}_{n=1}^N$, where the $x_n$ are
+the data available on each object, comprising in our
+example both estimates of physical quantities derived from the spectra
+(spectroscopic parallaxes, logg, Teff, vrad, etc..) and the
+information used in making the decision whether to target the object
+in the first place (position, magnitude, color, etc..). The catalog
+columns x may also contain quantities that neither entered the
+targetting decision nor were derived from the spectra, but may prove
+useful in the subsequent analysis, such as proper motions.
 
 The density of stars $\lambda(x\given\theta)$ you expect to get
 \emph{in your catalog} is, however, very different from this, and it
