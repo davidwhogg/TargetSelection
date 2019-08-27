@@ -42,6 +42,7 @@
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\foreign}[1]{\textsl{#1}}
 \newcommand{\etal}{\foreign{et al.}}
+\newcommand{\etc}{\foreign{etc.}}
 \renewcommand{\paragraph}[1]{\medskip\noindent\textit{#1} ---}
 
 % margins and headers and spacing changes
@@ -157,46 +158,55 @@ The density function $\lambda_0(z\given\theta)$ delivers the expected
 number density of stars in the Milky Way (number per $z$-space or
 property-space volume) as a function of $z$.
 
-HOGG SYNTACTICAL; IN THE MIDDLE OF RIX COMMENTS.
+The whole experiment results in a catalog of $N$ objects,
+$\set{y_n}_{n=1}^N$, where each $y_n$ contains the data available on
+each object, comprising in our example both estimates of physical
+quantities derived from the spectra (spectroscopic parallax, effective
+temperature, radial velocity, \etc) and the information used in making
+the decision whether to target the object in the first place
+(position, magnitude, color, \etc).
+The catalog entry $y_n$ may also contain quantities that neither
+entered the targeting decision nor were derived from the spectra, but
+may prove useful in the subsequent analysis, such as proper motions.
+The density of stars $\lambda(y\given\theta)$ you expect to get
+in the catalog in data space
+is very different from the true density $\lambda_0(z\given\theta)$.
+The most obvious and important difference is that many (real or
+counter-factual) objects are not in the catalog as they were not targeted,
+because they were too faint, too blue, or outside the survey area.
+Another difference is that this catalog density
+is a function not of true stellar properties $z$ but rather of the noisily
+observed properties $y$.
 
-The whole experiment results in a catalog of objects, $\set{x_n}_{n=1}^N$, where the $x_n$ are
-the data available on each object, comprising in our
-example both estimates of physical quantities derived from the spectra
-(spectroscopic parallaxes, logg, Teff, vrad, etc..) and the
-information used in making the decision whether to target the object
-in the first place (position, magnitude, color, etc..). The catalog
-columns x may also contain quantities that neither entered the
-targetting decision nor were derived from the spectra, but may prove
-useful in the subsequent analysis, such as proper motions.
-
-The density of stars $\lambda(x\given\theta)$ you expect to get
-\emph{in your catalog} is, however, very different from this, and it
-is a function not of true stellar properties $z$ but rather of noisily
-observed properties $x$, which could be in photometry space or
-spectrum space or other spaces.
-This function $\lambda(x\given\theta)$ delivers the expected number
-density of stars in your catalog (number per $x$-space or observed-data volume)
-as a function of observed data $x$.
+This catalog density function $\lambda(y\given\theta)$ delivers the expected number
+density of stars in your catalog (number per $y$-space or observed-data volume)
+as a function of observed data $y$.
 This rate function is a product of the true density $\lambda_0(\cdot)$
-times a \emph{selection function} $S(x)$ which describes the
+times a \emph{selection function} $S(y)$ which describes the
 probability that the source would have entered the catalog:
 \begin{equation}
-\lambda(x\given\theta) = S(x)\,\int\lambda_0(z\given\theta)\,p(x\given z)\,\dd z
+\lambda(y\given\theta) = S(y)\,\int\lambda_0(z\given\theta)\,p(y\given z)\,\dd z
 \quad,
 \end{equation}
-where $p(x\given z)$ is a likelihood function, or the probability
-density that you would observe data $x$ if the star has true
+where $p(y\given z)$ is a likelihood function, or the probability
+density that you would observe data $y$ if the star has true
 properties $z$, and the integral is over the whole possible domain of
 true properties $z$.
-The likelihood function $p(x\given z)$ corrects the true density function
+The argument of $S(y)$ is all observed properties $y$; in practice,
+$S(y)$ may not depend at all on many of them, which could then be
+dropped from explicit consideration.
+In the simple illustrative case at hand $S(y)$ may effectively only be
+a function only of position and photometry, even though $y$ contains
+many more things.
+The likelihood function or noise model $p(y\given z)$ corrects the true density function
 for the fact that the observations are noisy; the integral makes this a
 kind of convolution.
-The selection function $S(x)$ corrects the density function for the
+The selection function $S(y)$ corrects the density function for the
 selection effects.
 Inference of the parameters $\theta$ of the Galaxy proceeds by
 building a model of your observed catalog in the context of this
-convolved, selected rate $\lambda(x\given\theta)$ in the data space
-$x$.
+convolved, selected rate $\lambda(y\given\theta)$ in the data space
+$y$.
 
 Our goal in this \documentname\ is to discuss the conditions under
 which this selection function can be well understood in a real survey.
@@ -831,6 +841,7 @@ This work benefitted from our conversations with
 \bibitem[Loredo \& Wasserman(1995)]{loredogrb} Loredo, T.~J., \& Wasserman, I.~M., 1995, \apjs, 96, 261 
 \bibitem[Loredo(2004)]{loredo} Loredo, T.~J., 2004, American Institute of Physics Conference Series, 195
 \bibitem[Mandel \etal(2019)]{mfg} Mandel, I., Farr, W.~M., \& Gair, J.~R., 2019, \mnras, 486, 1086
+\bibitem[Marshall \etal(1983)]{marshall} Marshall,~H.~L., Avni,~Y., Tananbaum,~H., \etal, 1983, \apj, 269, 35
 \bibitem[Schmidt(1968)]{schmidt} Schmidt, M.\ 1968, \apj, 151, 393
 \bibitem[York \etal(2000)]{sdss} York, D.~G., Adelman, J., Anderson, J.~E., \etal, 2000, \aj, 120, 1579
 \end{thebibliography}
@@ -874,7 +885,7 @@ selection function and compare it to the data.
 The best comparison is made through a justified likelihood function.
 Here we construct that function.
 This discussion is worth comparing to prior discussions (including
-especially \citealt{loredo, bovy, exopop, mfg}).
+especially \citealt{marshall, loredo, bovy, exopop, mfg}).
 
 As we posited in the main text, we are designing a catalog or a targeted
 spectroscopic project
@@ -991,7 +1002,7 @@ have integrated out the true latent properties $\set{z_n}_{n=1}^N$.
 This (\ref{eq:lf}) is the likelihood function used in our exoplanet
 populations work (\citealt{exopop}).
 It is very related to likelihoods
-used in other context by us and others (\citealt{loredogrb, bernstein,
+used in other context by us and others (\citealt{marshall, loredogrb, bernstein,
   bovy, mfg}).
 There are some differences however;
 in many projects, the selection function
