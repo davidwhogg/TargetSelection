@@ -128,18 +128,17 @@ Let's start with an example:
 Imagine that you want to learn the exponential scale length of the
 Milky Way disk.
 One approach is to take spectroscopy of stars in some region or box in
-color--magnitude space in some region or fields on the sky,
+color--magnitude space in some region or fields on the sky, and then
 work out their distances using spectroscopically determined absolute
-magnitudes, that is, spectroscopic
-parallaxes.
+magnitudes.
 We will then perform inference on that catalog.
 But of course the distribution of stars in the sample or catalog you have produced will not
 follow the exponential distribution expected from a pure exponential-disk
 model.
 This is for two reasons:
 The first is that your measurements of distance will be noisy.
-The second---and far more important---is that your selection of stars in
-some color-magnitude box enormously affects the distribution of stars
+The second---and far more important---is that your selection of stars
+enormously affects the distribution of stars
 you actually get in your sample.
 This is a classic version of a \emph{selection effect} and, if you
 have designed your experiment sensibly, it can be described in terms of a
@@ -153,14 +152,15 @@ for example the scale length, scale height, and overall stellar mass
 of the Milky Way disk.
 The properties $z$ might be foremost true Galactocentric position
 (possibly translated to heliocentric coordinates) and true luminosity,
-but also perhaps true metallicities, temperatures, and so on.
+but also perhaps true metallicities, ages, and so on.
 The density function $\lambda_0(z\given\theta)$ delivers the expected
 number density of stars in the Milky Way (number per $z$-space or
 property-space volume) as a function of $z$.
 
-The whole experiment results in a catalog of $N$ objects,
+This whole experiment (selecting stars and taking spectra)
+results in a catalog of $N$ objects,
 $\set{y_n}_{n=1}^N$, where each $y_n$ contains the data available on
-each object, comprising in our example both estimates of physical
+each object $n$, comprising in our example both estimates of physical
 quantities derived from the spectra (spectroscopic parallax, effective
 temperature, radial velocity, \etc) and the information used in making
 the decision whether to target the object in the first place
@@ -172,16 +172,17 @@ The density of stars $\lambda(y\given\theta)$ you expect to get
 in the catalog in data space
 is very different from the true density $\lambda_0(z\given\theta)$.
 The most obvious and important difference is that many (real or
-counter-factual) objects are not in the catalog as they were not targeted,
-because they were too faint, too blue, or outside the survey area.
+counter-factual) objects are not in the catalog
+because they were too faint, too blue, outside the survey area, or
+didn't produce relevant spectroscopic results.
 Another difference is that this catalog density
 is a function not of true stellar properties $z$ but rather of the noisily
-observed properties $y$.
+observed properties (data) $y$.
 
 This catalog density function $\lambda(y\given\theta)$ delivers the expected number
 density of stars in your catalog (number per $y$-space or observed-data volume)
 as a function of observed data $y$.
-This rate function is a product of the true density $\lambda_0(\cdot)$
+This density function is a product of the true density $\lambda_0(\cdot)$
 times a \emph{selection function} $S(y)$ which describes the
 probability that the source would have entered the catalog:
 \begin{equation}
@@ -205,7 +206,7 @@ The selection function $S(y)$ corrects the density function for the
 selection effects.
 Inference of the parameters $\theta$ of the Galaxy proceeds by
 building a model of your observed catalog in the context of this
-convolved, selected rate $\lambda(y\given\theta)$ in the data space
+convolved, selected density $\lambda(y\given\theta)$ in the data space
 $y$.
 
 Our goal in this \documentname\ is to discuss the conditions under
