@@ -8,8 +8,8 @@ Desiderata for target selection; a rant?
 
 ## License
 Copyright 2019 the authors.
-All rights reserved.
-This is random words right now; we will license it soon.
+All code in this project is released open-source under the *MIT License*.
+See the file `LICENSE` for more information.
 
 ## Documentation
 - `cd paper`
